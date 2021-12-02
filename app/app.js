@@ -2,7 +2,9 @@
 // const example = require('./example')\
 
 const authEvents = require('./auth/events')
+const gameUI = require('./game/ui')
 const Modal = require('bootstrap').Modal
+const testGame = true
 
 
 
@@ -10,7 +12,8 @@ const Modal = require('bootstrap').Modal
 // require('./example')
 
 $(() => {
-    $('#game-section').hide(0)
+    // $('#game-section').hide(0)
+    // $('.box').on('click', gameUI.attemptMove)
     $('#signup').hide(0)
     $('#signin').hide(0)
     $('#signed-in-account').hide(0)
@@ -21,4 +24,8 @@ $(() => {
     $('#signin-register').on('click', authEvents.onSigninRegisterButton)
     $('#register-signin').on('click', authEvents.onRegisterSigninButton)
     $('#signout-button').on('click', authEvents.onSignout)
+    if (testGame) {
+      $('#game-section').show(0)
+      $('.box').on('click', gameUI.attemptMove)
+    }
 })

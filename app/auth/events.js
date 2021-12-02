@@ -2,6 +2,7 @@ const authUI = require('./ui')
 const authAPI = require('./api')
 const getFormFields = require('../../lib/get-form-fields')
 const store = require('../store')
+const gameUI = require('../game/ui')
 
 const onSigninButton = event => {
     event.preventDefault()
@@ -51,6 +52,7 @@ const onSigninSubmit = event => {
             store.token = signinResult.user.token
             console.log(`store: `, store)
             authUI.signinSuccess(store.email)
+            gameUI.showBoard()
         })
         .catch((signinResult) => {console.log('signin failed', signinResult)})
 }

@@ -8,3 +8,67 @@
     margin: 0 5px;
     display: block;
 }
+
+.container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 480px;
+	//margin: 50px auto 0 auto;
+}
+
+.box{
+	float: left;
+	width: 150px;
+	height: 150px;
+	border: 1px solid $secondary;
+	font-size: 85px;
+	text-align: center;
+	line-height: 100px; 
+  }
+
+.container .box:hover{
+	background: $primary;
+	color: $secondary;
+}
+
+#box0 {
+    border-left: 0; 
+    border-top: 0
+}
+
+#box1 {
+    border-top: 0
+}
+
+#box2 {
+    border-top: 0; 
+    border-right: 0
+}
+
+#box3 {
+    border-left: 0
+}
+
+#box4 {
+    
+}
+
+#box5 {
+    border-right: 0
+}
+
+#box6 {
+    border-left: 0; 
+    border-bottom: 0
+}
+
+#box7 {
+    border-bottom: 0
+}
+
+#box8 {
+    border-right: 0; 
+    border-bottom: 0
+}

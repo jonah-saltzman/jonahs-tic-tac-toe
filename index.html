@@ -22,6 +22,7 @@
             <a class="navbar-brand" href="#">Jonah's Tic-Tac-Toe</a>
           </div>
           <button id="launch-authModal" type="button" class="btn btn-primary btn-lg">Login/Signup</button>
+          <span id="signed-in-account"></span><button id="signout-button" class="btn btn-outline-secondary" type="button">Sign Out</button>
         </div>
       </nav>
       <section id="authentication">
@@ -29,7 +30,7 @@
         <!--BEGIN SIGNIN FORM-->
         <section id="signin">
           <form id="signin-form">
-            <div class="signin-form-group">
+            <div id="signin-email-group" class="signin-form-group">
               <label class="form-label" id="signin-form-email-label" for="signinform[email]">Email address</label>
               <input type="email" class="form-control" id="signinform[email]" name="signinform[email]" aria-describedby="signin-form-email-label" placeholder="Enter email">
             </div>
@@ -38,6 +39,7 @@
               <input type="password" class="form-control" id="signinform[password]" name="signinform[password]" aria-describedby="signin-form-pass-label" placeholder="Enter password">
             </div>
             <button type="submit" class="btn btn-primary">Sign-in</button>
+            <button id="signin-register" type="button" class="btn btn-outline-secondary">Register</button>
           </form>
         </section>
         <!--END SIGNIN FORM-->
@@ -58,9 +60,37 @@
               <input type="password" class="form-control" id="signupform[passwordConfirm]" name="signupform[passwordConfirm]" aria-describedby="signup-form-confirmpass-label" placeholder="Re-enter password">
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
+            <button id="register-signin" type="button" class="btn btn-outline-secondary">Sign-in</button>
           </form>
         </section>
         <!--END SIGNUP FORM-->
+      </section>
+      <section id="game-section">
+        <div class="container" id="game-container">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <div class="container" id="game-board">
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                </div>
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                </div>
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                  <div class="col-4"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+        </div>
       </section>
     </body>
 </html>

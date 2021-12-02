@@ -1,4 +1,5 @@
 const { apiUrl } = require('../config')
+const store = require('../store')
 
 const registerAPI = data => {
     const registerUrl = apiUrl + "/sign-up/"
@@ -31,9 +32,22 @@ const signinAPI = (data) => {
 	})
 }
 
+const signoutAPI = () => {
+    const token = store.token
+    const signoutURL = apiUrl + '/sign-out/'
+    return $.ajax({
+        url: signoutURL,
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
 module.exports = {
     registerAPI,
-    signinAPI
+    signinAPI,
+    signoutAPI
 }
 
 $('#myClass').text('x')

@@ -14,18 +14,7 @@
     </head>
     <body>
       <!--MODAL-->
-      <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModal" aria-hidden="true">
-        <div class="authModal-dialogue" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!--END MODAL-->
       <nav class="navbar">
         <div class="container-fluid">
@@ -35,5 +24,43 @@
           <button id="launch-authModal" type="button" class="btn btn-primary btn-lg">Login/Signup</button>
         </div>
       </nav>
+      <section id="authentication">
+        <section id="authentication-messages"></section>
+        <!--BEGIN SIGNIN FORM-->
+        <section id="signin">
+          <form id="signin-form">
+            <div class="signin-form-group">
+              <label class="form-label" id="signin-form-email-label" for="signinform[email]">Email address</label>
+              <input type="email" class="form-control" id="signinform[email]" name="signinform[email]" aria-describedby="signin-form-email-label" placeholder="Enter email">
+            </div>
+            <div class="signin-form-group">
+              <label class="form-label" id="signin-form-pass-label" for="signinform[password]">Password</label>
+              <input type="password" class="form-control" id="signinform[password]" name="signinform[password]" aria-describedby="signin-form-pass-label" placeholder="Enter password">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign-in</button>
+          </form>
+        </section>
+        <!--END SIGNIN FORM-->
+
+        <!--BEGIN SIGNUP FORM-->
+        <section id="signup">
+          <form id="signup-form">
+            <div class="signup-form-group">
+              <label class="form-label" id="signup-form-email-label" for="signupform[email]">Email address</label>
+              <input type="email" class="form-control" id="signupform[email]" name="signupform[email]" aria-describedby="signup-form-email-label" placeholder="Enter email">
+            </div>
+            <div class="signup-form-group">
+              <label class="form-label" id="signup-form-pass-label" for="signupform[password]">Password</label>
+              <input type="password" class="form-control" id="signupform[password]" name="signupform[password]" aria-describedby="signup-form-pass-label" placeholder="Enter password">
+            </div>
+            <div class="signup-form-group">
+              <label class="form-label" id="signup-form-confirmpass-label" for="signupform[passwordConfirm]">Confirm password</label>
+              <input type="password" class="form-control" id="signupform[passwordConfirm]" name="signupform[passwordConfirm]" aria-describedby="signup-form-confirmpass-label" placeholder="Re-enter password">
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </section>
+        <!--END SIGNUP FORM-->
+      </section>
     </body>
 </html>

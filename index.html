@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Jonah's Tic-Tac-Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -13,89 +13,89 @@
       
     </head>
     <body>
-      <!--MODAL-->
-        <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="authModalLabel">Sign in or Create an Account</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--MODAL-->
+      <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="container-fluid">
+                <h5 id="authModal-title" class="modal-title" id="authModalLabel">Login</h5>
+                <span id="signin-failed-badge" class="badge bg-danger">Sign-in failed</span>
+                <span id="signup-failed-badge" class="badge bg-danger">Sign-up failed</span>
+                <span id="account-created-badge" class="badge bg-success">Account created</span>
               </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
+              <button id="close-auth-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <section id="modal-signin">
+                <form id="authmodal-signin-form">
+                  <div class="mb-3">
+                    <label for="signin-email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="signin-email" name="signinform[email]">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signin-password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signin-password" name="signinform[password]">
+                  </div>
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="signin-remember" name="signinform[remember]">
+                    <label class="form-check-label" for="signin-remember">Stay signed in</label>
+                  </div>
+                </form>
+              </section>
+              <section id="modal-signup">
+                <form id="authmodal-signup-form">
+                  <div class="mb-3">
+                    <label for="signup-email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="signup-email" name="signupform[email]">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signup-password" name="signupform[password]">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-password" class="form-label">Confirm password</label>
+                    <input type="password" class="form-control" id="signup-passwordconfirm" name="signupform[passwordConfirm]">
+                  </div>
+                </form>
+              </section>
+            </div>
+            <div class="modal-footer">
+             <button type="submit" form="authmodal-signin-form" class="btn btn-primary signin-toggled">Login</button>
+             <button id="signin-register" type="button" class="btn btn-outline-secondary signin-toggled">Sign Up</button>
+             <button type="submit" form="authmodal-signup-form" class="btn btn-primary signup-toggled">Sign Up</button>
+             <button id="register-signin" type="button" class="btn btn-outline-secondary signup-toggled">Login</button>
             </div>
           </div>
         </div>
-      <!--END MODAL-->
+      </div>
+<!--END MODAL-->
       <nav class="navbar">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Jonah's Tic-Tac-Toe</a>
+            <a class="navbar-brand">Jonah's Tic-Tac-Toe</a>
           </div>
+          <span id="signed-in-badge" class="badge bg-success"></span>
           <button id="launch-authModal" type="button" class="btn btn-primary btn-lg">Login/Signup</button>
-          <span id="signed-in-account"></span><button id="signout-button" class="btn btn-outline-secondary" type="button">Sign Out</button>
+          <button id="signout-button" class="btn btn-outline-secondary" type="button">Sign Out</button>
         </div>
       </nav>
-      <section id="authentication">
-        <section id="authentication-messages"></section>
-        <!--BEGIN SIGNIN FORM-->
-        <section id="signin">
-          <form id="signin-form">
-            <div id="signin-email-group" class="signin-form-group">
-              <label class="form-label" id="signin-form-email-label" for="signinform[email]">Email address</label>
-              <input type="email" class="form-control" id="signinform[email]" name="signinform[email]" aria-describedby="signin-form-email-label" placeholder="Enter email">
-            </div>
-            <div class="signin-form-group">
-              <label class="form-label" id="signin-form-pass-label" for="signinform[password]">Password</label>
-              <input type="password" class="form-control" id="signinform[password]" name="signinform[password]" aria-describedby="signin-form-pass-label" placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn btn-primary">Sign-in</button>
-            <button id="signin-register" type="button" class="btn btn-outline-secondary">Register</button>
-          </form>
-        </section>
-        <!--END SIGNIN FORM-->
-
-        <!--BEGIN SIGNUP FORM-->
-        <section id="signup">
-          <form id="signup-form">
-            <div class="signup-form-group">
-              <label class="form-label" id="signup-form-email-label" for="signupform[email]">Email address</label>
-              <input type="email" class="form-control" id="signupform[email]" name="signupform[email]" aria-describedby="signup-form-email-label" placeholder="Enter email">
-            </div>
-            <div class="signup-form-group">
-              <label class="form-label" id="signup-form-pass-label" for="signupform[password]">Password</label>
-              <input type="password" class="form-control" id="signupform[password]" name="signupform[password]" aria-describedby="signup-form-pass-label" placeholder="Enter password">
-            </div>
-            <div class="signup-form-group">
-              <label class="form-label" id="signup-form-confirmpass-label" for="signupform[passwordConfirm]">Confirm password</label>
-              <input type="password" class="form-control" id="signupform[passwordConfirm]" name="signupform[passwordConfirm]" aria-describedby="signup-form-confirmpass-label" placeholder="Re-enter password">
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-            <button id="register-signin" type="button" class="btn btn-outline-secondary">Sign-in</button>
-          </form>
-        </section>
-        <!--END SIGNUP FORM-->
-      </section>
       <section id="game-section">
+        
         <div id="button-div">
-          <button id="start-game-btn" class="btn btn-primary" type="button">New Game</button>
+          <button id="start-game-btn" class="btn btn-primary" type="button" disabled>New Game</button>
           <button id="reset-game-btn" class="btn btn-primary" type="button" disabled>Reset Game</button>
         </div>
-        <div class="container" id="game-board">
-                  <div data-id=0 class="box start-game" id="box0"></div>
-                  <div data-id=1 class="box start-game" id="box1"></div>
-                  <div data-id=2 class="box start-game" id="box2"></div>
-                  <div data-id=3 class="box start-game" id="box3"></div>
-                  <div data-id=4 class="box start-game" id="box4"></div>
-                  <div data-id=5 class="box start-game" id="box5"></div>
-                  <div data-id=6 class="box start-game" id="box6"></div>
-                  <div data-id=7 class="box start-game" id="box7"></div>
-                  <div data-id=8 class="box start-game" id="box8"></div>
+        <div class="container start-game" id="game-board">
+                  <div data-id=0 class="box" id="box0"></div>
+                  <div data-id=1 class="box" id="box1"></div>
+                  <div data-id=2 class="box" id="box2"></div>
+                  <div data-id=3 class="box" id="box3"></div>
+                  <div data-id=4 class="box" id="box4"></div>
+                  <div data-id=5 class="box" id="box5"></div>
+                  <div data-id=6 class="box" id="box6"></div>
+                  <div data-id=7 class="box" id="box7"></div>
+                  <div data-id=8 class="box" id="box8"></div>
         </div>
       </section>
     </body>

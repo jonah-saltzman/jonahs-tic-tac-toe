@@ -2,16 +2,17 @@
 let authToggle = null
 
 const registerSuccess = email => {
-    clearAuthMessages()
-    $('#authentication-messages')
-        .append(`<span class="auth-message">Account created for ${email}</span>`)
-    
+    //clearAuthMessages()
+    //$('#account-created-badge').show(0)
+    console.log(`successfully registered: `, email)
+    hideSignup()
+    showSignin(email)
 }
 
 const signinSuccess = email => {
-    clearAuthMessages()
+    //clearAuthMessages()
     hideSignin()
-    $('#signed-in-account').text(`Welcome, ${email}`)
+    $('#signed-in-badge').text(`Welcome, ${email}`)
     showAuthedUI()
 }
 
@@ -32,36 +33,49 @@ const signoutMessage = (email) => {
 }
 
 const clearAuthMessages = () => {
-    $('#authentication-messages').empty()
+    $('#signin-failed-badge').hide(0)
+    $('#signup-failed-badge').hide(0)
+    $('#account-created-badge').hide(0)
 }
 
 const resetAuthForms = () => {
-    $('#signup-form').trigger('reset')
-    $('#signin-form').trigger('reset')
+    //clearAuthMessages()
+    $('#authmodal-signin-form').trigger('reset')
+    $('#authmodal-signup-form').trigger('reset')
     //('#signin-form').reset()
 }
 
 const showSignup = (email) => {
-     $('#signup').show(0)
+     $('#modal-signup').show(0)
+     $('#authModal-title').text('Sign-up for an account')
+     $('.signup-toggled').show(0)
      authToggle = false
 }
 
 const hideSignup = () => {
-    $('#signup').hide(0)
+    $('#modal-signup').hide(0)
+    $('#authModal-title').text('Login')
+    $('.signup-toggled').hide(0)
+    $('#signup-failed-badge').hide(0)
+}
+
+const setSigninEmail = (email) => {
+    $('#signin-email').val(email)
 }
 
 const showSignin = (email) => {
-    console.log(`now showing signin`)
-    $('#signin').show(0)
-    // if (email) {
-    //     console.log(`autofilling email`, email)
-    //     $('#signin-email-group').children('label').attr('value', email)
-    // }
+    if (email) $('#account-created-badge').show(0)
+    $('#modal-signin').show(0)
+    $('#authModal-title').text('Login')
+    $('.signin-toggled').show(0)
     authToggle = true
 }
 
 const hideSignin = () => {
-	$('#signin').hide(0)
+	$('#modal-signin').hide(0)
+    $('#authModal-title').text('Sign-up for an account')
+    $('.signin-toggled').hide(0)
+    $('#signin-failed-badge').hide(0)
 }
 
 const clearForms = () => {
@@ -69,31 +83,52 @@ const clearForms = () => {
     $('#signin-form').trigger('reset')
 }
 
-const toggleAuthForms = (savedEmail) => {
-    const email = savedEmail || false
-    if (authToggle) {
-        console.log(`authToggle was true, hiding signin and showing signup`)
-        hideSignin()
-        showSignup(email)
-    }
-    else {
-        console.log(`authToggle was false, hiding signup and showing signin`)
-        hideSignup()
-        showSignin(email)
-    }
+// const toggleAuthForms = (savedEmail) => {
+//     const email = savedEmail || false
+//     if (authToggle) {
+//         console.log(`authToggle was true, hiding signin and showing signup`)
+//         hideSignin()
+//         showSignup(email)
+//     }
+//     else {
+//         console.log(`authToggle was false, hiding signup and showing signin`)
+//         hideSignup()
+//         showSignin(email)
+//     }
+// }
+
+const signinFail = () => {
+    $('#signin-failed-badge').show(0)
+}
+
+const registerFail = () => {
+    $('#signup-failed-badge').show(0)
+}
+
+const enableNewGame = () => {
+    $('#start-game-btn').attr('disabled', false)
+}
+
+const resetCurrentUser = () => {
+    $('#signed-in-badge').text('')
 }
 
 module.exports = {
-    showSignup,
-    clearForms,
-    registerSuccess,
-    resetAuthForms,
-    hideSignup,
-    toggleAuthForms,
-    showSignin,
-    hideSignin,
-    clearAuthMessages,
-    signinSuccess,
-    hideAuthedUI,
-    signoutMessage
+	showSignup,
+	clearForms,
+	registerSuccess,
+	resetAuthForms,
+	hideSignup,
+	//toggleAuthForms,
+	showSignin,
+	hideSignin,
+	clearAuthMessages,
+	signinSuccess,
+	hideAuthedUI,
+	signoutMessage,
+	signinFail,
+	registerFail,
+	setSigninEmail,
+	enableNewGame,
+    resetCurrentUser
 }

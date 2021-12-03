@@ -2,14 +2,20 @@ const authUI = require('./ui')
 const authAPI = require('./api')
 const getFormFields = require('../../lib/get-form-fields')
 const store = require('../store')
+const gameData = require('../game/data')
 const gameUI = require('../game/ui')
 
-const onSigninButton = event => {
+const onSigninButton = (event, modal) => {
     event.preventDefault()
+    $('#account-created-badge').hide(0)
     console.log(`hit login button`)
-    console.log(event)
-    authUI.showSignin()
+    modal.show()
     //authUI.showAuthModal()
+}
+
+const onCloseAuthModal = () => {
+    authUI.resetAuthForms()
+    authUI.clearAuthMessages()
 }
 
 const onSigninRegisterButton = () => {
@@ -34,12 +40,13 @@ const onRegister = event => {
             console.log(`register succeeded: `, registerResult)
             authUI.registerSuccess(registerResult.user.email)
             authUI.resetAuthForms()
-            authUI.toggleAuthForms(registerResult.user.email)
+            authUI.setSigninEmail(registerResult.user.email)
+            //authUI.toggleAuthForms(registerResult.user.email)
         })
-        .catch(() => {console.log('register failed')})
+        .catch(authUI.registerFail)
 }
 
-const onSigninSubmit = event => {
+const onSigninSubmit = (event, authModal) => {
     event.preventDefault()
     authUI.clearAuthMessages()
     const signinData = getFormFields(event.target)
@@ -52,8 +59,14 @@ const onSigninSubmit = event => {
             store.token = signinResult.user.token
             console.log(`store: `, store)
             authUI.signinSuccess(store.email)
+            authUI.enableNewGame()
+            authModal.hide()
         })
-        .catch((signinResult) => {console.log('signin failed', signinResult)})
+        .catch(() => {
+            authUI.signinFail()
+            authUI.resetAuthForms()
+            authUI.setSigninEmail(signinData.signinform.email)
+        })
 }
 
 const onSignout = event => {
@@ -66,6 +79,13 @@ const onSignout = event => {
             store.authed = false
             store.email = null
             store.token = null
+            authUI.resetCurrentUser()
+            authUI.showSignin()
+            authUI.resetAuthForms()
+            gameData.resetGame()
+            gameUI.updateGameUI()
+            gameUI.renderBoard()
+            gameUI.logoutGameUI()
         })
         .catch(() => {
             console.log('failed to log out')
@@ -78,5 +98,6 @@ module.exports = {
 	onSigninSubmit,
 	onSigninRegisterButton,
 	onRegisterSigninButton,
-    onSignout
+	onSignout,
+	onCloseAuthModal,
 }

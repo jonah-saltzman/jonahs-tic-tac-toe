@@ -13,7 +13,35 @@ const gameInfo = {
     gameStarted: false,
     gameID: null,
     turn: null,
-    gameOver: null
+    gameOver: null,
+    winner: null,
+    apiData: {
+        game: {
+            cell: {
+                index: null,
+                value: null
+            },
+            over: null
+        }
+    }
+}
+
+const firstMoveMade = () => {
+    return board.some(position => position !== null)
+}
+
+const resetGame = () => {
+    board.forEach((pos, index) => board[index] = null)
+    gameInfo.gameStarted = false
+    gameInfo.gameID = null
+    gameInfo.turn = null
+    gameInfo.gameOver = null
+    gameInfo.winner = null
+    gameInfo.apiData.game.cell.index = null
+    gameInfo.apiData.game.cell.value = null
+    gameInfo.apiData.game.over = null
+    console.log(`after resetGame(): `, gameInfo)
+    console.log(board)
 }
 
 const players = ['x', 'o']
@@ -21,12 +49,11 @@ const players = ['x', 'o']
 const board = [null, null, null, null, null, null, null, null, null]
 
 const startGame = (newGame) => {
-    console.log(newGame)
     gameInfo.gameStarted = true
     gameInfo.gameID = newGame._id
     gameInfo.turn = 0
     gameInfo.gameOver = false
-    console.log(gameInfo)
+    console.log('new game: ', gameInfo)
 }
 
 const isGameStarted = () => {
@@ -38,7 +65,6 @@ const printBoard = () => {
 }
 
 const isGameOver = () => {
-    updateGameOver()
     return gameInfo.gameOver
 }
 
@@ -47,8 +73,20 @@ const getPlayer = () => {
 }
 
 const updateGameOver = () => {
-    if (checkWinner()) gameInfo.gameOver = true
-    else gameInfo.gameOver = false
+    if (checkWinner() || isDraw()) gameInfo.gameOver = true, gameInfo.apiData.game.over = true
+    else gameInfo.gameOver = false, gameInfo.apiData.game.over = false
+}
+
+const isDraw = () => {
+    if (board.every(position => position !== null) && !checkWinner()) {
+        console.log(`isDraw(): true`)
+        gameInfo.gameOver = true
+        gameInfo.apiData.game.over = true
+        gameInfo.winner = 'draw'
+        return true
+    }
+    console.log(`isDraw(): false`)
+    return false
 }
 
 const isPlayerTurn = player => {
@@ -57,35 +95,44 @@ const isPlayerTurn = player => {
 }
 
 const isValidMove = (player, position) => {
-    updateGameOver()
+    // updateGameOver()
     if (isGameOver() || board[position] || !isPlayerTurn(player)) {
-        console.log(`isValidMove(): false`)
         return false
-    } 
-    console.log(`isValidMove(): true`)
+    }
     return true
 }
 
 const addMove = (player, position) => {
     board[position] = players[player]
     gameInfo.turn === 0 ? (gameInfo.turn = 1) : (gameInfo.turn = 0)
-    if (checkWinner()) gameOver = true
+    if (checkWinner() || isDraw()) gameInfo.gameOver = true, gameInfo.apiData.game.over = true
+    gameInfo.apiData.game.cell.index = position
+    gameInfo.apiData.game.cell.value = players[player]
+    if (isDraw()) {
+        console.log(`addMove: draw`)
+        gameInfo.winner = 'draw'
+    }
 }
 
 function checkWinner() {
+    const allWins = []
 	for (const condition of conditions) {
+        let addCondition = false
 		for (let i = 0; i < 3; i++) {
 			if (
 				board[condition[i]] &&
 				condition.every((pos) => board[pos] === board[condition[0]])
 			) {
-                console.log(`game is over`)
-				return [board[condition[0]], condition]
+                gameInfo.winner = board[condition[0]]
+                gameInfo.gameOver = true
+                gameInfo.apiData.game.over = true
+                addCondition = true
 			}
 		}
+        if (addCondition) allWins.push(condition)
 	}
-    console.log(`checkwinner: gameisover=false`)
-	return false
+    console.log(`allWins[]: `, allWins)
+    return allWins.length ? [board[allWins[0]], allWins] : false
 }
 
 const getBoard = () => {
@@ -97,7 +144,12 @@ const getGameInfo = () => {
 }
 
 const getWinInfo = () => {
-    return checkWinner()
+    if (gameInfo.winner === 'draw') return ['draw', board]
+    return checkWinner(board, conditions)
+}
+
+const getGameApiData = () => {
+    return gameInfo
 }
 
 module.exports = {
@@ -112,5 +164,8 @@ module.exports = {
     startGame,
     getBoard,
     getGameInfo,
-    getWinInfo
+    getWinInfo,
+    getGameApiData,
+    resetGame,
+    firstMoveMade
 }

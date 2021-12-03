@@ -19,13 +19,27 @@
     transform: translate(-50%, 0);
 }
 
-#start-game-btn {
-   position: relative;
-   left: 50%;
-   top: 10%;
-   transform: translate(-50%, 25%);
-   height: 45px
+#button-div {
+    position: relative;
+    left: 50%;
+    transform: translate(-10.5%, 0%)
 }
+
+// #start-game-btn {
+//    position: relative;
+//    left: 50%;
+//    top: 10%;
+//    transform: translate(-50%, 25%);
+//    height: 45px
+// }
+
+// #reset-game-btn {
+//    position: relative;
+//    left: 50%;
+//    top: 10%;
+//    transform: translate(-50%, 25%);
+//    height: 45px
+// }
 
 .container{
     position: relative;
@@ -54,6 +68,16 @@
 
 .win-position {
     background-color: rgba(19, 219, 19, 0.657);
+    pointer-events: none;
+}
+
+.tie {
+    background-color: rgba(224, 224, 224, 0.657);
+    pointer-events: none;
+}
+
+.start-game {
+    background-color: rgba(255, 87, 87, 0.657);
     pointer-events: none;
 }
 

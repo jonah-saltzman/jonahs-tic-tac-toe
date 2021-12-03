@@ -28,5 +28,7 @@ $(() => {
       $('#game-section').show(0)
       $('.box').on('click', gameEvents.onBoardClick)
       $('#start-game-btn').on('click', gameEvents.onNewGame)
+      $('#reset-game-btn').hide(0)
+      $('#reset-game-btn').on('click', gameEvents.onResetGame)
     }
 })

@@ -66,6 +66,7 @@ const hideSignin = () => {
 
 const clearForms = () => {
     $('#signup-form').trigger('reset')
+    $('#signin-form').trigger('reset')
 }
 
 const toggleAuthForms = (savedEmail) => {

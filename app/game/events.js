@@ -4,23 +4,34 @@ const gameUI = require('./ui')
 const store = require('../store')
 
 const onBoardClick = (event) => {
+    console.log('clicked board')
     if (!gameData.isGameStarted()) {
         alert('Start a game to play!')
         return
     }
 	const dataID = $(event.target).data('id')
     const player = gameData.getPlayer()
-	console.log('data ID: ', dataID)
-    console.log(`current player: ${gameData.getPlayer()}`)
     if (gameData.isValidMove(player, dataID)) {
-        console.log(`valid for player ${player} to choose ${dataID}`)
         gameData.addMove(player, dataID)
+        gameAPI
+            .updateGame(gameData.getGameApiData())
+            .then(moveComplete)
     }
     else {
         console.log(`INVALID MOVE: player ${player} to ${dataID}`)
     }
-    console.log('game data:')
-	gameUI.renderBoard()
+}
+
+const moveComplete = () => {
+    gameUI.renderBoard()
+	gameUI.updateGameUI()
+}
+
+const onResetGame = () => {
+    gameData.resetGame()
+    console.log(`game is reset: `, gameData.getGameInfo())
+    onNewGame()
+    gameUI.renderBoard()
 }
 
 const onNewGame = () => {
@@ -29,11 +40,11 @@ const onNewGame = () => {
         return
     }
     if (!gameData.isGameStarted()) {
+        gameUI.startGameUI()
         gameAPI
             .newGame()
             .then((result) => {
                 gameData.startGame(result.game)
-                console.log(`game started: `, result)
                 gameUI.updateGameUI()
             })
     }
@@ -41,5 +52,6 @@ const onNewGame = () => {
 
 module.exports = {
 	onBoardClick,
-    onNewGame
+    onNewGame,
+    onResetGame
 }

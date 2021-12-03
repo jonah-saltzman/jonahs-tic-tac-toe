@@ -13,6 +13,20 @@ const newGame = () => {
     })
 }
 
+const updateGame = (gameData) => {
+    console.log('updating game API: ', gameData)
+    const updateURL = apiUrl + `/games/${gameData.gameID}/`
+    return $.ajax({
+        url: updateURL,
+        method: 'PATCH',
+        headers: {
+            Authorization: `Bearer ${store.token}`
+        },
+        data: gameData.apiData
+    })
+}
+
 module.exports = {
-    newGame
+    newGame,
+    updateGame,
 }

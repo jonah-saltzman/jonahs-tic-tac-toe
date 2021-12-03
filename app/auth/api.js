@@ -49,5 +49,3 @@ module.exports = {
     signinAPI,
     signoutAPI
 }
-
-$('#myClass').text('x')

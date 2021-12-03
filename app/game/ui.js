@@ -1,6 +1,6 @@
 const gameData = require('./data')
 
-const players = ['x', 'o']
+
 
 const showBoard = () => {
     console.log('showing board')
@@ -26,6 +26,7 @@ const updateGameUI = () => {
 }
 
 const renderBoard = () => {
+    if (!gameData.getWinInfo()) $('.container').removeClass('tie')
     const board = gameData.getBoard()
     console.log(`rendering board: `, board)
     for (const position in board) {
@@ -33,13 +34,13 @@ const renderBoard = () => {
             $(`#box${position}`).text(board[position].toUpperCase())
         }
         else {
-            $(`#box${position}`).text('').removeClass("win-position tie")
+            $(`#box${position}`).text('').removeClass("win-position")
         }
     }
     if (gameData.isGameOver()) {
         const winInfo = gameData.getWinInfo()
         if (winInfo[0] === 'draw') {
-            $('.box').addClass('tie')
+            $('.container').addClass('tie')
         }
         else {
             console.log(`winning combination: `, winInfo[1])
@@ -54,7 +55,11 @@ const renderBoard = () => {
 }
 
 const startGameUI = () => {
-    $('.box').removeClass('start-game')
+    $('.container').removeClass('start-game')
+}
+
+const logoutGameUI = () => {
+    $('.container').addClass('start-game')
 }
 
 // const clearBoard = () => {
@@ -62,9 +67,10 @@ const startGameUI = () => {
 // }
 
 module.exports = {
-    showBoard,
-    updateGameUI,
-    renderBoard,
-    startGameUI,
-    hideBoard
+	showBoard,
+	updateGameUI,
+	renderBoard,
+	startGameUI,
+	hideBoard,
+	logoutGameUI,
 }

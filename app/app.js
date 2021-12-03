@@ -12,24 +12,28 @@ const testGame = require('./testing')
 // require('./example')
 
 $(() => {
-    // $('#game-section').hide(0)
-    // $('.box').on('click', gameUI.attemptMove)
+    // Modals
+    const authModal = new Modal($('#authModal'))
+
+    // Initial hidden elements
     $('#reset-game-btn').hide(0)
-    $('#signup').hide(0)
-    $('#signin').hide(0)
-    $('#signed-in-account').hide(0)
     $('#signout-button').hide(0)
+    $('#signin-failed-badge').hide(0)
+    $('.signup-toggled').hide(0)
+    $('#modal-signup').hide(0)
+    $('#signup-failed-badge').hide(0)
+
+    // On-clicks
     $('#reset-game-btn').on('click', gameEvents.onResetGame)
     $('.box').on('click', gameEvents.onBoardClick)
     $('#start-game-btn').on('click', gameEvents.onNewGame)
-    $('#launch-authModal').on('click', authEvents.onSigninButton)
-    $('#signup-form').on('submit', authEvents.onRegister)
-    $('#signin-form').on('submit', authEvents.onSigninSubmit)
+    $('#launch-authModal').on('click', (event) => authEvents.onSigninButton(event, authModal))
     $('#signin-register').on('click', authEvents.onSigninRegisterButton)
     $('#register-signin').on('click', authEvents.onRegisterSigninButton)
     $('#signout-button').on('click', authEvents.onSignout)
-    if (testGame) {
-      $('#game-section').show(0)
-      $('#reset-game-btn').hide(0)
-    }
+    $('#close-auth-modal').on('click', authEvents.onCloseAuthModal)
+
+    // On-submits
+    $('#authmodal-signin-form').on('submit', event => {authEvents.onSigninSubmit(event, authModal)})
+    $('#authmodal-signup-form').on('submit', event => {authEvents.onRegister(event, authModal)})
 })

@@ -13,6 +13,10 @@
     display: block;
 }
 
+#signed-in-badge {
+    margin: auto;
+}
+
 #game-section {
     position: absolute;
     left: 50%;
@@ -46,8 +50,10 @@
     top: 20%;
     left: 50%;
     transform: translate(-50%, 10%);
-	width: 480px;
-    height: 480px;
+	width: 450px;
+    height: 450px;
+    margin: 0;
+    padding: 0;
 	//margin: 50px auto 0 auto;
 }
 
@@ -58,7 +64,9 @@
 	border: 2.5px solid $secondary;
 	font-size: 125px;
 	text-align: center;
-	line-height: 145px; 
+	line-height: 145px;
+    margin: 0;
+    padding: 0;
 }
 
 .container .box:hover {

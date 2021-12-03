@@ -2,7 +2,7 @@
 // const example = require('./example')\
 
 const authEvents = require('./auth/events')
-const gameUI = require('./game/ui')
+const gameEvents = require('./game/events')
 const Modal = require('bootstrap').Modal
 const testGame = true
 
@@ -26,6 +26,7 @@ $(() => {
     $('#signout-button').on('click', authEvents.onSignout)
     if (testGame) {
       $('#game-section').show(0)
-      $('.box').on('click', gameUI.attemptMove)
+      $('.box').on('click', gameEvents.onBoardClick)
+      $('#start-game-btn').on('click', gameEvents.onNewGame)
     }
 })

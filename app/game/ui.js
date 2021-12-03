@@ -1,16 +1,17 @@
+const gameData = require('./data')
+
 const showBoard = () => {
     console.log('showing board')
     $('#game-section').show(0)
 }
 
-const attemptMove = event => {
-    console.log('event.target: ', event.target)
-    console.log('event.target.id: ', event.target.id)
-    const dataID = $(event.target).data('id')
-    console.log('data ID: ', dataID)
+const updateGameUI = () => {
+    if (gameData.gameInfo.gameStarted) {
+        $('#start-game-btn').attr('disabled', true)
+    }
 }
 
 module.exports = {
     showBoard,
-    attemptMove
+    updateGameUI
 }

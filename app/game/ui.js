@@ -7,6 +7,10 @@ const showBoard = () => {
     $('#game-section').show(0)
 }
 
+const hideBoard = () => {
+    $('#game-section').hide(0)
+}
+
 const updateGameUI = () => {
     if (gameData.isGameStarted()) {
         $('#start-game-btn').hide(0)
@@ -61,5 +65,6 @@ module.exports = {
     showBoard,
     updateGameUI,
     renderBoard,
-    startGameUI
+    startGameUI,
+    hideBoard
 }

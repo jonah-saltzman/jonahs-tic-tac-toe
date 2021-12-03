@@ -52,7 +52,6 @@ const onSigninSubmit = event => {
             store.token = signinResult.user.token
             console.log(`store: `, store)
             authUI.signinSuccess(store.email)
-            gameUI.showBoard()
         })
         .catch((signinResult) => {console.log('signin failed', signinResult)})
 }

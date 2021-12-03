@@ -20,7 +20,7 @@ const onBoardClick = (event) => {
         console.log(`INVALID MOVE: player ${player} to ${dataID}`)
     }
     console.log('game data:')
-	gameData.printBoard()
+	gameUI.renderBoard()
 }
 
 const onNewGame = () => {

@@ -4,7 +4,7 @@
 const authEvents = require('./auth/events')
 const gameEvents = require('./game/events')
 const Modal = require('bootstrap').Modal
-const testGame = true
+const testGame = require('./testing')
 
 
 

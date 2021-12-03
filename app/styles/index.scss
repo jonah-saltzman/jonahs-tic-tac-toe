@@ -52,8 +52,9 @@
 	color: white;
 }
 
-.container .box.crossed {
-    background-color: rgba(177, 177, 177, 0.274);
+.win-position {
+    background-color: rgba(19, 219, 19, 0.657);
+    pointer-events: none;
 }
 
 #box0 {

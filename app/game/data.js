@@ -38,6 +38,7 @@ const printBoard = () => {
 }
 
 const isGameOver = () => {
+    updateGameOver()
     return gameInfo.gameOver
 }
 
@@ -56,8 +57,12 @@ const isPlayerTurn = player => {
 }
 
 const isValidMove = (player, position) => {
-    console.log(`checking move player ${player} to ${position}`)
-    if (isGameOver() || board[position] || !isPlayerTurn(player)) return false
+    updateGameOver()
+    if (isGameOver() || board[position] || !isPlayerTurn(player)) {
+        console.log(`isValidMove(): false`)
+        return false
+    } 
+    console.log(`isValidMove(): true`)
     return true
 }
 
@@ -83,6 +88,18 @@ function checkWinner() {
 	return false
 }
 
+const getBoard = () => {
+    return board
+}
+
+const getGameInfo = () => {
+    return gameInfo
+}
+
+const getWinInfo = () => {
+    return checkWinner()
+}
+
 module.exports = {
     printBoard,
     isGameOver,
@@ -92,5 +109,8 @@ module.exports = {
     addMove,
     isGameStarted,
     gameInfo,
-    startGame
+    startGame,
+    getBoard,
+    getGameInfo,
+    getWinInfo
 }

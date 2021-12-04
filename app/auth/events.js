@@ -39,6 +39,12 @@ const onRegisterSigninButton = () => {
 const onRegister = event => {
     event.preventDefault()
     const registerData = getFormFields(event.target)
+    if (registerData.signupform.password !== registerData.signupform.passwordConfirm) {
+        authUI.passwordMatchFail()
+        authUI.resetAuthForms()
+        authUI.setSignupEmail(registerData.signupform.email)
+        return
+    }
     console.log(registerData.signupform)
     authAPI
         .registerAPI(registerData.signupform)
@@ -49,7 +55,10 @@ const onRegister = event => {
             authUI.setSigninEmail(registerResult.user.email)
             //authUI.toggleAuthForms(registerResult.user.email)
         })
-        .catch(authUI.registerFail)
+        .catch(() => {
+            authUI.registerFail()
+            authUI.resetAuthForms()
+        })
 }
 
 const onSigninSubmit = (event, authModal) => {

@@ -1,6 +1,10 @@
 //const bsObjs = require('../bs-objects')
 let authToggle = null
 
+const passwordMatchFail = () => {
+    $('#password-match-badge').show(0)
+}
+
 const registerSuccess = email => {
     //clearAuthMessages()
     //$('#account-created-badge').show(0)
@@ -36,6 +40,7 @@ const clearAuthMessages = () => {
     $('#signin-failed-badge').hide(0)
     $('#signup-failed-badge').hide(0)
     $('#account-created-badge').hide(0)
+    $('#password-match-badge').hide(0)
 }
 
 const resetAuthForms = () => {
@@ -57,6 +62,7 @@ const hideSignup = () => {
     $('#authModal-title').text('Login')
     $('.signup-toggled').hide(0)
     $('#signup-failed-badge').hide(0)
+    $('#password-match-badge').hide(0)
 }
 
 const setSigninEmail = (email) => {
@@ -64,7 +70,7 @@ const setSigninEmail = (email) => {
 }
 
 const showSignin = (email) => {
-    if (email) $('#account-created-badge').show(0)
+    if (email) $('#account-created-badge').show(0), $('#password-match-badge').hide(0)
     $('#modal-signin').show(0)
     $('#authModal-title').text('Login')
     $('.signin-toggled').show(0)
@@ -113,6 +119,10 @@ const resetCurrentUser = () => {
     $('#signed-in-badge').text('')
 }
 
+const setSignupEmail = email => {
+    $('#signup-email').val(email)
+}
+
 module.exports = {
 	showSignup,
 	clearForms,
@@ -130,5 +140,7 @@ module.exports = {
 	registerFail,
 	setSigninEmail,
 	enableNewGame,
-    resetCurrentUser
+	resetCurrentUser,
+	passwordMatchFail,
+    setSignupEmail
 }

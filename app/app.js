@@ -22,6 +22,7 @@ $(() => {
     $('.signup-toggled').hide(0)
     $('#modal-signup').hide(0)
     $('#signup-failed-badge').hide(0)
+    $('#password-match-badge').hide(0)
 
     // On-clicks
     $('#reset-game-btn').on('click', gameEvents.onResetGame)

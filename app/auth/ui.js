@@ -1,31 +1,40 @@
-//const bsObjs = require('../bs-objects')
-let authToggle = null
 
+// Show and hide authentication modal
+const showModal = (modal) => {
+	modal.show()
+}
+const hideModal = (modal) => {
+    modal.hide()
+}
+
+// Respond to authentication failures
 const passwordMatchFail = () => {
     $('#password-match-badge').show(0)
 }
+const signinFail = () => {
+	$('#signin-failed-badge').show(0)
+}
+const registerFail = () => {
+	$('#signup-failed-badge').show(0)
+}
 
-const registerSuccess = email => {
-    //clearAuthMessages()
-    //$('#account-created-badge').show(0)
-    console.log(`successfully registered: `, email)
+// Respond to authentication successes
+const registerSuccess = (email) => {
     hideSignup()
     showSignin(email)
 }
-
-const signinSuccess = email => {
-    //clearAuthMessages()
+const signinSuccess = (email) => {
     hideSignin()
-    $('#signed-in-badge').text(`Welcome, ${email}`)
     showAuthedUI()
+    $('#signed-in-badge').text(`Welcome, ${email}`)
 }
 
+// Show and hide UI elements requiring authorization
 const showAuthedUI = () => {
     $('#launch-authModal').hide(0)
     $('#signed-in-account').show(0)
     $('#signout-button').show(0)
 }
-
 const hideAuthedUI = () => {
     $('#launch-authModal').show(0)
     $('#signed-in-account').hide(0)
@@ -44,19 +53,16 @@ const clearAuthMessages = () => {
 }
 
 const resetAuthForms = () => {
-    //clearAuthMessages()
     $('#authmodal-signin-form').trigger('reset')
     $('#authmodal-signup-form').trigger('reset')
-    //('#signin-form').reset()
 }
 
-const showSignup = (email) => {
+// Show or hide the sign-up UI + associated badges in auth modal
+const showSignup = () => {
      $('#modal-signup').show(0)
      $('#authModal-title').text('Sign-up for an account')
      $('.signup-toggled').show(0)
-     authToggle = false
 }
-
 const hideSignup = () => {
     $('#modal-signup').hide(0)
     $('#authModal-title').text('Login')
@@ -65,18 +71,21 @@ const hideSignup = () => {
     $('#password-match-badge').hide(0)
 }
 
+// Auto-populate the authentication email fields
 const setSigninEmail = (email) => {
     $('#signin-email').val(email)
 }
+const setSignupEmail = (email) => {
+	$('#signup-email').val(email)
+}
 
+// Show or hide the sign-in UI + associated badges in auth modal
 const showSignin = (email) => {
     if (email) $('#account-created-badge').show(0), $('#password-match-badge').hide(0)
     $('#modal-signin').show(0)
     $('#authModal-title').text('Login')
     $('.signin-toggled').show(0)
-    authToggle = true
 }
-
 const hideSignin = () => {
 	$('#modal-signin').hide(0)
     $('#authModal-title').text('Sign-up for an account')
@@ -84,43 +93,20 @@ const hideSignin = () => {
     $('#signin-failed-badge').hide(0)
 }
 
+// Clear contents of authentication forms
 const clearForms = () => {
     $('#signup-form').trigger('reset')
     $('#signin-form').trigger('reset')
 }
 
-// const toggleAuthForms = (savedEmail) => {
-//     const email = savedEmail || false
-//     if (authToggle) {
-//         console.log(`authToggle was true, hiding signin and showing signup`)
-//         hideSignin()
-//         showSignup(email)
-//     }
-//     else {
-//         console.log(`authToggle was false, hiding signup and showing signin`)
-//         hideSignup()
-//         showSignin(email)
-//     }
-// }
-
-const signinFail = () => {
-    $('#signin-failed-badge').show(0)
-}
-
-const registerFail = () => {
-    $('#signup-failed-badge').show(0)
-}
-
+// New game button enabled upon successful sign-in
 const enableNewGame = () => {
     $('#start-game-btn').attr('disabled', false)
 }
 
+// Remove current-user badge
 const resetCurrentUser = () => {
     $('#signed-in-badge').text('')
-}
-
-const setSignupEmail = email => {
-    $('#signup-email').val(email)
 }
 
 module.exports = {
@@ -129,7 +115,6 @@ module.exports = {
 	registerSuccess,
 	resetAuthForms,
 	hideSignup,
-	//toggleAuthForms,
 	showSignin,
 	hideSignin,
 	clearAuthMessages,
@@ -142,5 +127,7 @@ module.exports = {
 	enableNewGame,
 	resetCurrentUser,
 	passwordMatchFail,
-    setSignupEmail
+    setSignupEmail,
+    showModal,
+    hideModal
 }

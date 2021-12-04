@@ -4,21 +4,21 @@
       <title>Jonah's Tic-Tac-Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags-->
+      <!-- Links -->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <!-- Do not add `script` tags-->
+      <!-- Scripts -->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
       
     </head>
     <body>
-<!--MODAL-->
+      <!-- MODAL -->
       <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <!--MODAL title and authentication success/failure badges-->
+              <!-- MODAL title and authentication success/failure badges -->
               <div class="container-fluid">
                 <h5 id="authModal-title" class="modal-title" id="authModalLabel">Login</h5>
                 <span id="signin-failed-badge" class="badge bg-danger">Sign-in failed</span>
@@ -26,10 +26,10 @@
                 <span id="account-created-badge" class="badge bg-success">Account created</span>
                 <span id="password-match-badge" class="badge bg-danger">Passwords don't match</span>
               </div>
-              <button id="close-auth-modal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button id="close-auth-modal" type="button" class="btn-close" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <!--MODAL sign-in content-->
+            <!-- MODAL sign-in content -->
               <section id="modal-signin">
                 <form name="signinForm" id="authmodal-signin-form">
                   <div class="mb-3">
@@ -46,7 +46,7 @@
                   </div>
                 </form>
               </section>
-            <!--MODAL register content-->
+            <!-- MODAL register content -->
               <section id="modal-signup">
                 <form id="authmodal-signup-form">
                   <div class="mb-3">
@@ -64,7 +64,7 @@
                 </form>
               </section>
             </div>
-            <!--MODAL submit & sign-in/sign-up toggle buttons-->
+            <!-- MODAL submit & sign-in/sign-up toggle buttons -->
             <div class="modal-footer">
              <button type="submit" form="authmodal-signin-form" class="btn btn-primary signin-toggled">Login</button>
              <button id="signin-register" type="button" class="btn btn-outline-secondary signin-toggled">Sign Up</button>
@@ -74,27 +74,27 @@
           </div>
         </div>
       </div>
-<!--END MODAL-->
-      <!--Navbar-->
+      <!-- END MODAL -->
+      <!-- Navbar -->
       <nav class="navbar">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand">Jonah's Tic-Tac-Toe</a>
           </div>
           <span id="signed-in-badge" class="badge bg-success"></span>
-          <!--Toggle-able sign-in/sign-out buttons (sign-in launches modal)-->
+          <!-- Toggle-able sign-in/sign-out buttons (sign-in launches modal) -->
           <button id="launch-authModal" type="button" class="btn btn-primary btn-lg">Login/Signup</button>
           <button id="signout-button" class="btn btn-outline-secondary" type="button">Sign Out</button>
         </div>
       </nav>
 
       <section id="game-section">
-        <!--Game start/reset buttons-->
+        <!-- Game start/reset buttons -->
         <div id="button-div">
           <button id="start-game-btn" class="btn btn-primary" type="button" disabled>New Game</button>
           <button id="reset-game-btn" class="btn btn-primary" type="button" disabled>Reset Game</button>
         </div>
-        <!--Game board container & divs-->
+        <!-- Game board container & divs -->
         <div class="container start-game" id="game-board">
           <div data-id=0 class="box" id="box0"></div>
           <div data-id=1 class="box" id="box1"></div>

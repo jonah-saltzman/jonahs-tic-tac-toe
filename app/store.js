@@ -1,10 +1,14 @@
 const testing = require('./testing')
 
+// Store object to hold authorization information
+
 const store = {
     authed: false,
     email: null,
     token: null
 }
+
+// Function and code to automatically authenticate with API
 
 const autoSignin = (email, password) => {
     return $.ajax({
@@ -16,7 +20,7 @@ const autoSignin = (email, password) => {
 					password: password,
 				},
 			},
-		})
+	})
 }
 
 if (testing) {
@@ -33,4 +37,4 @@ if (testing) {
 	
 }
 
-	module.exports = store
+module.exports = store

@@ -1,9 +1,9 @@
 const { apiUrl } = require('../config')
 const store = require('../store')
 
-const registerAPI = data => {
+// New user registration API call
+const registerAPI = (data) => {
     const registerUrl = apiUrl + "/sign-up/"
-    console.log('url: ', registerUrl)
     return $.ajax({
         url: registerUrl,
         method: 'POST',
@@ -17,9 +17,9 @@ const registerAPI = data => {
     })
 }
 
+// Sign-in API call
 const signinAPI = (data) => {
 	const signinURL = apiUrl + '/sign-in/'
-	console.log('url: ', signinURL)
 	return $.ajax({
 		url: signinURL,
 		method: 'POST',
@@ -32,6 +32,7 @@ const signinAPI = (data) => {
 	})
 }
 
+// Sign-out API call
 const signoutAPI = () => {
     const token = store.token
     const signoutURL = apiUrl + '/sign-out/'

@@ -2,6 +2,7 @@ const gameData = require('./data')
 const gameAPI = require('./api')
 const gameUI = require('./ui')
 const store = require('../store')
+const testing = require('../testing')
 
 const onBoardClick = (event) => {
     console.log('clicked board')

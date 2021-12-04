@@ -4,8 +4,8 @@
 const authEvents = require('./auth/events')
 const gameEvents = require('./game/events')
 const Modal = require('bootstrap').Modal
-const testGame = require('./testing')
-
+const testing = require('./testing')
+const [email, password] = ['mac@book.com', 'Jonah']
 
 
 // use require without a reference to ensure a file is bundled

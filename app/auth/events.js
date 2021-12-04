@@ -2,8 +2,14 @@ const authUI = require('./ui')
 const authAPI = require('./api')
 const getFormFields = require('../../lib/get-form-fields')
 const store = require('../store')
+const testing = require('../testing')
 const gameData = require('../game/data')
 const gameUI = require('../game/ui')
+
+if (testing) {
+    authUI.signinSuccess(store.email)
+	authUI.enableNewGame()
+}
 
 const onSigninButton = (event, modal) => {
     event.preventDefault()

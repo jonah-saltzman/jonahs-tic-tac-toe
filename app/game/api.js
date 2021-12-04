@@ -2,6 +2,7 @@ const { apiUrl } = require('../config')
 const store = require('../store')
 
 const newGame = () => {
+    console.log(`token: `, store.token)
     const newGameURL = apiUrl + "/games/"
     return $.ajax({
         url: newGameURL,

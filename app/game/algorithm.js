@@ -10,35 +10,35 @@ const conditions = [
 ]
 
 const alg = {
-    wins: 0,
-    losses: 0,
-    draws: 0
+	wins: 0,
+	losses: 0,
+	draws: 0,
 }
 
 function movesToCompare(board, playerIndex) {
-    [alg.wins, alg.losses, alg.draws] = [0, 0, 0]
-    const player = playerIndex === 0 ? 'x' : 'o'
+	[alg.wins, alg.losses, alg.draws] = [0, 0, 0]
+	const player = playerIndex === 0 ? 'x' : 'o'
 	const moves = []
 	getMoves(board, player).forEach((move) => moves.push({ move: move }))
 
 	moves.forEach(
 		(move) =>
-			(move.score = scoreBoard(generateBoard(board, move.move), player, player))
+			(move.score = scoreBoard(generateBoard(board, move.move), player, player, 0))
 	)
 
 	const validMoves = moves.filter((score) => score.move.player)
-    console.log('valid moves:', validMoves)
+	console.log('valid moves:', validMoves)
 	const highestScore = validMoves.reduce(
 		(highScore, move) => (move.score > highScore ? move.score : highScore),
 		validMoves[0].score
 	)
-    console.log('highest score:', highestScore)
+	console.log('highest score:', highestScore)
 	return validMoves.filter((move) => move.score === highestScore)
 }
 
-function scoreBoard(board, moveBy, player) {
+function scoreBoard(board, moveBy, player, depth) {
 	const boardResult = gameOver(board, player)
-	if (boardResult !== false) return boardResult
+	if (boardResult !== false) return boardResult / (depth + 1)
 
 	const nextMover = moveBy === 'x' ? 'o' : 'x'
 
@@ -48,7 +48,7 @@ function scoreBoard(board, moveBy, player) {
 
 	return boards.reduce(
 		(score, board) =>
-			board ? score + scoreBoard(board, nextMover, player) : score,
+			board ? score + scoreBoard(board, nextMover, player, depth + 1) : score,
 		0
 	)
 }
@@ -98,7 +98,7 @@ const gameOver = (board, player) => {
 }
 
 function getAlgNumbers() {
-    return alg
+	return alg
 }
 
-module.exports = {movesToCompare, getAlgNumbers}
+module.exports = { movesToCompare, getAlgNumbers }

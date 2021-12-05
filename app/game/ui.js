@@ -31,6 +31,8 @@ const renderBoard = () => {
             $(`#box${position}`).text('').removeClass("win-position")
     }
     if (gameData.isGameOver()) {
+        const compWin = gameData.getPlayer() === 1
+        console.log(`computer won?: `, !compWin)
         const winInfo = gameData.getWinInfo()
         if (winInfo[0] === 'draw') {
             $('.container').addClass('tie')

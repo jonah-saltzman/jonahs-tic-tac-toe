@@ -1,41 +1,39 @@
 @import '~bootstrap/scss/bootstrap';
 
 // Authentication form styling
-
 .signup-form-group {
     margin: 7px 0
 }
-
 .form-label {
     margin: 0 5px;
     display: block;
 }
-
 #signed-in-badge {
     margin: auto;
 }
 
 // Non-board game element styling
-
 #game-section {
+    margin-top: 50px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
 }
 
 #button-div {
+    
     position: relative;
     left: 50%;
-    transform: translate(-10.5%, 0%)
+    transform: translate(-25%, 0);
 }
 
 // Container of board spaces
+
 
 #game-board {
     // Double-check necessity given .container rules
     margin: 0 0 0 3px;
 }
-
 .container{
     position: relative;
     top: 20%;
@@ -48,13 +46,11 @@
 }
 
 // Whole-board styling for ties & prior to game start
-
 .tie {
     background-color: rgba(224, 224, 224, 0.657);
     pointer-events: none;
     border-radius: 25px;
 }
-
 .start-game {
     background-color: rgba(255, 87, 87, 0.657);
     pointer-events: none;
@@ -62,7 +58,6 @@
 }
 
 // Board spaces styling
-
 .box{
 	float: left;
 	width: 150px;
@@ -74,53 +69,43 @@
     margin: 0;
     padding: 0;
 }
-
 .container .box:hover {
 	background: #0d6dfda9;
 	color: white;
 }
-
 .win-position {
     background-color: rgba(19, 219, 19, 0.657);
     pointer-events: none;
 }
 
 // Individual box border styling
-
 #box0 {
     border-left: 0; 
     border-top: 0;
     border-radius: 35px 0 0 0;
 }
-
 #box1 {
     border-top: 0
 }
-
 #box2 {
     border-top: 0; 
     border-right: 0;
     border-radius: 0 35px 0 0;
 }
-
 #box3 {
     border-left: 0
 }
-
 #box5 {
     border-right: 0
 }
-
 #box6 {
     border-left: 0; 
     border-bottom: 0;
     border-radius: 0 0 0 35px;
 }
-
 #box7 {
     border-bottom: 0
 }
-
 #box8 {
     border-right: 0; 
     border-bottom: 0;

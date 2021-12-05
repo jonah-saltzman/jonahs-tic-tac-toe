@@ -91,8 +91,24 @@
       <section id="game-section">
         <!-- Game start/reset buttons -->
         <div id="button-div">
-          <button id="start-game-btn" class="btn btn-primary" type="button" disabled>New Game</button>
-          <button id="reset-game-btn" class="btn btn-primary" type="button" disabled>Reset Game</button>
+          <form id="players-form">
+            <div class="row d-flex align-items-center">
+              <div class="col-auto">
+                <button id="start-game-btn" class="btn btn-primary" type="submit" form="players-form" disabled>New Game</button>
+                <button id="reset-game-btn" class="btn btn-primary" type="button" disabled>Reset Game</button>
+              </div>
+              <div class="col-auto">
+                <div class="player-form-check">
+                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked>
+                  <label class="form-check-label player-btn" for="pvp-btn">2-Player</label>
+                </div>
+                <div class="player-form-check">
+                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="vs-comp-btn" value="comp">
+                  <label class="form-check-label player-btn" for="vs-comp-btn">VS Computer</label>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
         <!-- Game board container & divs -->
         <div class="container start-game" id="game-board">

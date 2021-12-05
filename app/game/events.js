@@ -2,37 +2,56 @@ const gameData = require('./data')
 const gameAPI = require('./api')
 const gameUI = require('./ui')
 const store = require('../store')
-const testing = require('../testing')
+const {movesToCompare, getAlgNumbers} = require('./algorithm')
+const getFormFields = require('../../lib/get-form-fields')
 
 const onBoardClick = (event) => {
-    console.log('clicked board')
     if (!gameData.isGameStarted()) {
-        alert('Start a game to play!')
+        alert('Start a new game to play!')
         return
     }
-	const dataID = $(event.target).data('id')
+	const divID = $(event.target).data('id')
     const player = gameData.getPlayer()
-    if (gameData.isValidMove(player, dataID)) {
-        gameData.addMove(player, dataID)
-        gameAPI
-            .updateGame(gameData.getGameApiData())
-            .then(moveComplete)
-    }
-    else {
-        console.log(`INVALID MOVE: player ${player} to ${dataID}`)
-    }
-}
-
-const moveComplete = () => {
-    gameUI.renderBoard()
-	gameUI.updateGameUI()
+    if (gameData.isValidMove(divID)) {
+            gameData.addMove(player, divID)
+            gameAPI.updateGame(gameData.getGameInfo()).then(() => {
+                gameUI.renderBoard()
+                gameUI.updateGameUI()
+            }).then(() => {
+                if (!gameData.isPVP() && !gameData.isGameOver()) {
+                    const compMoves = movesToCompare(gameData.getBoard(), gameData.getPlayer())
+                    const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
+                    gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
+                    gameAPI.updateGame(gameData.getGameInfo()).then(() => {
+                        gameUI.renderBoard()
+                        gameUI.updateGameUI()
+                        gameUI.updateGameInfo(getAlgNumbers())
+                    })
+                }
+            })
+        }
 }
 
 const onResetGame = () => {
     gameData.resetGame()
-    console.log(`game is reset: `, gameData.getGameInfo())
-    onNewGame()
+    gameUI.updateGameUI()
     gameUI.renderBoard()
+}
+
+const onStartGame = (event) => {
+	event.preventDefault()
+    if (store.authed === false) {
+        alert('Please login!')
+        return
+    }
+	const pvp = getFormFields(event.target).playerSelect
+    if (!gameData.isGameStarted()) {
+        gameUI.startGameUI()
+        gameAPI.newGame().then((result) => {
+                gameData.startGame(result.game, pvp === 'pvp' ? true : false)
+                gameUI.updateGameUI()
+            })
+    }
 }
 
 const onNewGame = () => {
@@ -42,9 +61,7 @@ const onNewGame = () => {
     }
     if (!gameData.isGameStarted()) {
         gameUI.startGameUI()
-        gameAPI
-            .newGame()
-            .then((result) => {
+        gameAPI.newGame().then((result) => {
                 gameData.startGame(result.game)
                 gameUI.updateGameUI()
             })
@@ -54,5 +71,6 @@ const onNewGame = () => {
 module.exports = {
 	onBoardClick,
     onNewGame,
-    onResetGame
+    onResetGame,
+    onStartGame
 }

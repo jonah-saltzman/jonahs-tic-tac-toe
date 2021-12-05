@@ -24,14 +24,11 @@ const autoSignin = (email, password) => {
 }
 
 if (testing) {
-	console.log(`auto login`)
 	const [email, password] = ['q@yt.com', 'q']
 	const autoLogin = autoSignin('mac@book.com', 'Jonah').then((autoResponse) => {
-		console.log(`logged in automatically: `, autoResponse)
         store.authed = true
         store.email = autoResponse.user.email
         store.token = autoResponse.user.token
-		console.log('token: ', store.token)
 		return autoResponse
 	})
 	

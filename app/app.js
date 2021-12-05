@@ -22,7 +22,10 @@ $(() => {
     // On-click game events
     $('#reset-game-btn').on('click', gameEvents.onResetGame)
     $('.box').on('click', gameEvents.onBoardClick)
-    $('#start-game-btn').on('click', gameEvents.onNewGame)
+    // $('#start-game-btn').on('click', gameEvents.onNewGame)
+
+    // Start-game form
+    $('#players-form').on('submit', gameEvents.onStartGame)
 
     // On-click authenticaion events
     $('#launch-authModal').on('click', (event) => authEvents.onSigninButton(event, authModal))

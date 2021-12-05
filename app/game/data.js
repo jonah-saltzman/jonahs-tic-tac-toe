@@ -9,12 +9,17 @@ const conditions = [
 	[2, 4, 6],
 ]
 
+const players = ['x', 'o']
+
+const board = [null, null, null, null, null, null, null, null, null]
+
 const gameInfo = {
     gameStarted: false,
     gameID: null,
     turn: null,
     gameOver: null,
     winner: null,
+    pvp: null,
     apiData: {
         game: {
             cell: {
@@ -26,10 +31,6 @@ const gameInfo = {
     }
 }
 
-const firstMoveMade = () => {
-    return board.some(position => position !== null)
-}
-
 const resetGame = () => {
     board.forEach((pos, index) => board[index] = null)
     gameInfo.gameStarted = false
@@ -37,81 +38,39 @@ const resetGame = () => {
     gameInfo.turn = null
     gameInfo.gameOver = null
     gameInfo.winner = null
+    gameInfo.pvp = null
     gameInfo.apiData.game.cell.index = null
     gameInfo.apiData.game.cell.value = null
     gameInfo.apiData.game.over = null
-    console.log(`after resetGame(): `, gameInfo)
-    console.log(board)
 }
 
-const players = ['x', 'o']
-
-const board = [null, null, null, null, null, null, null, null, null]
-
-const startGame = (newGame) => {
+const startGame = (newGame, pvp) => {
     gameInfo.gameStarted = true
     gameInfo.gameID = newGame._id
     gameInfo.turn = 0
     gameInfo.gameOver = false
-    console.log('new game: ', gameInfo)
-}
-
-const isGameStarted = () => {
-    return gameInfo.gameStarted
-}
-
-const printBoard = () => {
-    console.log(board)
-}
-
-const isGameOver = () => {
-    return gameInfo.gameOver
-}
-
-const getPlayer = () => {
-    return gameInfo.turn
-}
-
-const updateGameOver = () => {
-    if (checkWinner() || isDraw()) gameInfo.gameOver = true, gameInfo.apiData.game.over = true
-    else gameInfo.gameOver = false, gameInfo.apiData.game.over = false
+    gameInfo.pvp = pvp
 }
 
 const isDraw = () => {
-    if (board.every(position => position !== null) && !checkWinner()) {
-        console.log(`isDraw(): true`)
+    if (board.every(position => position) && !checkWinner()) {
         gameInfo.gameOver = true
         gameInfo.apiData.game.over = true
         gameInfo.winner = 'draw'
         return true
     }
-    console.log(`isDraw(): false`)
     return false
-}
-
-const isPlayerTurn = player => {
-    if (player === gameInfo.turn) return true
-    return false
-}
-
-const isValidMove = (player, position) => {
-    // updateGameOver()
-    if (isGameOver() || board[position] || !isPlayerTurn(player)) {
-        return false
-    }
-    return true
 }
 
 const addMove = (player, position) => {
     board[position] = players[player]
     gameInfo.turn === 0 ? (gameInfo.turn = 1) : (gameInfo.turn = 0)
-    if (checkWinner() || isDraw()) gameInfo.gameOver = true, gameInfo.apiData.game.over = true
     gameInfo.apiData.game.cell.index = position
     gameInfo.apiData.game.cell.value = players[player]
-    if (isDraw()) {
-        console.log(`addMove: draw`)
+    if (checkWinner() || isDraw())
+        gameInfo.gameOver = true, gameInfo.apiData.game.over = true
+    if (isDraw())
         gameInfo.winner = 'draw'
-    }
 }
 
 function checkWinner() {
@@ -129,43 +88,43 @@ function checkWinner() {
                 addCondition = true
 			}
 		}
-        if (addCondition) allWins.push(condition)
+        if (addCondition)
+            allWins.push(condition)
 	}
-    console.log(`allWins[]: `, allWins)
-    return allWins.length ? [board[allWins[0]], allWins] : false
+    return (allWins.length) ? [board[allWins[0]], allWins] : false
 }
 
-const getBoard = () => {
-    return board
-}
+const isPVP = () => gameInfo.pvp
 
-const getGameInfo = () => {
-    return gameInfo
-}
+const isGameStarted = () => gameInfo.gameStarted
 
-const getWinInfo = () => {
-    if (gameInfo.winner === 'draw') return ['draw', board]
-    return checkWinner(board, conditions)
-}
+const isGameOver = () => gameInfo.gameOver
 
-const getGameApiData = () => {
-    return gameInfo
-}
+const firstMoveMade = () => board.some((position) => position !== null)
+
+const getPlayer = () => gameInfo.turn
+
+const isValidMove = (position) => !(isGameOver() || board[position])
+
+const getBoard = () => board
+
+const getGameInfo = () => gameInfo
+
+const getWinInfo = () => (gameInfo.winner === 'draw')
+                            ? ['draw', board]
+                            : checkWinner(board, conditions)        
 
 module.exports = {
-    printBoard,
     isGameOver,
-    updateGameOver,
     isValidMove,
     getPlayer,
     addMove,
     isGameStarted,
-    gameInfo,
     startGame,
     getBoard,
     getGameInfo,
     getWinInfo,
-    getGameApiData,
     resetGame,
-    firstMoveMade
+    firstMoveMade,
+    isPVP
 }

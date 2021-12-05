@@ -18,8 +18,18 @@ const alg = {
 function movesToCompare(board, playerIndex) {
 	[alg.wins, alg.losses, alg.draws] = [0, 0, 0]
 	const player = playerIndex === 0 ? 'x' : 'o'
+    console.log(`creating new array`)
 	const moves = []
-	getMoves(board, player).forEach((move) => moves.push({ move: move }))
+    console.log(moves)
+    console.log(`after logging moves`)
+	getMoves(board, player).forEach((returnedMove) => {
+        const newMoveObj = {
+            move: returnedMove
+        }
+        moves.push(newMoveObj)
+    })
+    console.log(moves)
+    console.log(`BEFORE FOREACH`)
 
 	moves.forEach(
 		(move) =>
@@ -36,9 +46,14 @@ function movesToCompare(board, playerIndex) {
 	return validMoves.filter((move) => move.score === highestScore)
 }
 
+//function preCheck(board, moves,)
+
 function scoreBoard(board, moveBy, player, depth) {
 	const boardResult = gameOver(board, player)
-	if (boardResult !== false) return boardResult / (depth + 1)
+	if (boardResult !== false) {
+        if (depth === 0) return boardResult === 1 ? Infinity : Infinity * -1
+        return boardResult / (depth + 1)
+    }
 
 	const nextMover = moveBy === 'x' ? 'o' : 'x'
 

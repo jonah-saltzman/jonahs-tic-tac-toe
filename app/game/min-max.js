@@ -55,6 +55,9 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT) {
         return score + depth
 	if (isGameOver(board)) 
         return 0
+
+	// generate boards depending on isMaximizer
+
 	if (isMaximizer) {
 		return generateBoards(board, _PLAYER).reduce((maxScore, currentBoard) => {
 			const boardScore = minMax(

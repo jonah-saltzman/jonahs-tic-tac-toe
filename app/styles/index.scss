@@ -3,10 +3,41 @@
 body {
     display: flex; 
     flex-direction: column;
+    background-color: #0d6dfd25;
+}
+
+label > input[type="radio"] {
+  display: none;
+}
+label > input[type="radio"] + *::before {
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.3rem;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: gray;
+}
+label > input[type="radio"]:checked + * {
+  color: teal;
+}
+label > input[type="radio"]:checked + *::before {
+  background: radial-gradient(teal 0%, teal 40%, transparent 50%, transparent);
+  border-color: teal;
+}
+.white-btn {
+    color: white
+}
+
+.navbar-brand {
+    color:rgb(255, 255, 255)
 }
 
 #top-nav {
-    background-color: #4b93ff34;
+    background-color: #4b93ff;
 }
 
 // Authentication form styling

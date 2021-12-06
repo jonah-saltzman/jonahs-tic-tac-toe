@@ -1,13 +1,14 @@
 const gameData = require('./data')
-
-// class gameAlert {
-//     constructor(type,)
-// }
+const {gameAlert} = require('./alert')
 
 const updateGameInfo = (alg) => {
-    const info = gameData.getGameInfo()
-    if (info.gameOver) {
-        $('.alerts-container')
+    const info = {game: gameData.getGameInfo(), alg: alg ? alg : null}
+    if (info.game.gameOver) {
+        const gameOverAlert = new gameAlert(true, info)
+        $('.alerts-container').prepend(gameOverAlert.getHtml())
+    } else if (!info.game.pvp) {
+        const compMoveAlert = new gameAlert(false, info)
+        $('.alerts-container').prepend(compMoveAlert.getHtml())
     }
 }
 

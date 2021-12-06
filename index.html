@@ -83,8 +83,8 @@
           </div>
           <span id="signed-in-badge" class="badge bg-success"></span>
           <!-- Toggle-able sign-in/sign-out buttons (sign-in launches modal) -->
-          <button id="launch-authModal" type="button" class="btn btn-primary btn-lg">Login/Signup</button>
-          <button id="signout-button" class="btn btn-outline-secondary" type="button">Sign Out</button>
+          <button id="launch-authModal" type="button" class="btn btn-outline-light btn-lg white-btn">Login/Signup</button>
+          <button id="signout-button" class="btn btn-outline-light btn-lg" type="button">Sign Out</button>
         </div>
       </nav>
       <!-- GAME INFO TAB -->
@@ -95,26 +95,26 @@
           <form id="players-form">
             <div class="row d-flex align-items-center">
               <div class="col-auto">
-                <button id="start-game-btn" class="btn btn-primary" type="submit" form="players-form" disabled>New Game</button>
+                <button id="start-game-btn" class="btn btn-success" type="submit" form="players-form" disabled>New Game</button>
                 <button id="reset-game-btn" class="btn btn-primary" type="button" disabled>Reset Game</button>
               </div>
               <div class="col-auto">
                 <div class="player-form-check">
-                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked disabled>
+                  <input class="form-check-input player-btn radio" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked disabled>
                   <label class="form-check-label player-btn" for="pvp-btn">2-Player</label>
                 </div>
                 <div class="player-form-check">
-                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="vs-comp-btn" value="comp" disabled>
+                  <input class="form-check-input player-btn radio" type="radio" name="playerSelect" id="vs-comp-btn" value="comp" disabled>
                   <label class="form-check-label player-btn" for="vs-comp-btn">VS Computer</label>
                 </div>
               </div>
               <div class="col-auto">
                 <div class="difficulty-form-check">
-                  <input class="form-check-input difficulty-btn" type="radio" name="difficulty" id="easy-btn" value="easy" checked>
+                  <input class="form-check-input difficulty-btn radio" type="radio" name="difficulty" id="easy-btn" value="easy" checked>
                   <label class="form-check-label difficulty-btn" for="pvp-btn">Easy</label>
                 </div>
                 <div class="difficulty-form-check">
-                  <input class="form-check-input difficulty-btn" type="radio" name="difficulty" id="hard-btn" value="hard">
+                  <input class="form-check-input difficulty-btn radio" type="radio" name="difficulty" id="hard-btn" value="hard">
                   <label class="form-check-label difficulty-btn" for="vs-comp-btn">Hard</label>
                 </div>
               </div>

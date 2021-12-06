@@ -18,6 +18,7 @@ const onBoardClick = (event) => {
             gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                 gameUI.renderBoard()
                 gameUI.updateGameUI()
+                gameUI.updateGameInfo()
             }).then(() => { 
                 const [computerMove, getAlgInfo] = gameData.getGameInfo().easy
                     ? [easyDriver, getAlgNumbers]

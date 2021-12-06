@@ -22,6 +22,7 @@ const gameInfo = {
     moves: null,
     pvp: null,
     easy: null,
+    lastMove: null,
     apiData: {
         game: {
             cell: {
@@ -42,6 +43,7 @@ const resetGame = () => {
     gameInfo.winner = null
     gameInfo.pvp = null
     gameInfo.easy = null
+    gameInfo.lastMove = null
     gameInfo.apiData.game.cell.index = null
     gameInfo.apiData.game.cell.value = null
     gameInfo.apiData.game.over = null
@@ -75,6 +77,7 @@ const addMove = (player, position) => {
     gameInfo.turn === 0 ? (gameInfo.turn = 1) : (gameInfo.turn = 0)
     gameInfo.apiData.game.cell.index = position
     gameInfo.apiData.game.cell.value = players[player]
+    gameInfo.lastMove = position
     if (checkWinner() || isDraw())
         gameInfo.gameOver = true, gameInfo.apiData.game.over = true
     if (isDraw())

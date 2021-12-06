@@ -34,11 +34,13 @@ const showAuthedUI = () => {
     $('#launch-authModal').hide(0)
     $('#signed-in-account').show(0)
     $('#signout-button').show(0)
+    $('.difficulty-form-check').show(0)
 }
 const hideAuthedUI = () => {
     $('#launch-authModal').show(0)
     $('#signed-in-account').hide(0)
     $('#signout-button').hide(0)
+    $('.difficulty-form-check').hide(0)
 }
 
 const signoutMessage = (email) => {
@@ -102,6 +104,7 @@ const clearForms = () => {
 // New game button enabled upon successful sign-in
 const enableNewGame = () => {
     $('#start-game-btn').attr('disabled', false)
+    $('.player-btn').attr('disabled', false)
 }
 
 // Remove current-user badge

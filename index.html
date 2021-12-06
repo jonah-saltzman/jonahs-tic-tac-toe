@@ -76,7 +76,7 @@
       </div>
       <!-- END MODAL -->
       <!-- Navbar -->
-      <nav class="navbar">
+      <nav id="top-nav"class="navbar">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand">Jonah's Tic-Tac-Toe</a>
@@ -87,6 +87,7 @@
           <button id="signout-button" class="btn btn-outline-secondary" type="button">Sign Out</button>
         </div>
       </nav>
+      <!-- GAME INFO TAB -->
 
       <section id="game-section">
         <!-- Game start/reset buttons -->
@@ -99,19 +100,29 @@
               </div>
               <div class="col-auto">
                 <div class="player-form-check">
-                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked>
+                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked disabled>
                   <label class="form-check-label player-btn" for="pvp-btn">2-Player</label>
                 </div>
                 <div class="player-form-check">
-                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="vs-comp-btn" value="comp">
+                  <input class="form-check-input player-btn" type="radio" name="playerSelect" id="vs-comp-btn" value="comp" disabled>
                   <label class="form-check-label player-btn" for="vs-comp-btn">VS Computer</label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="difficulty-form-check">
+                  <input class="form-check-input difficulty-btn" type="radio" name="difficulty" id="easy-btn" value="easy" checked>
+                  <label class="form-check-label difficulty-btn" for="pvp-btn">Easy</label>
+                </div>
+                <div class="difficulty-form-check">
+                  <input class="form-check-input difficulty-btn" type="radio" name="difficulty" id="hard-btn" value="hard">
+                  <label class="form-check-label difficulty-btn" for="vs-comp-btn">Hard</label>
                 </div>
               </div>
             </div>
           </form>
         </div>
         <!-- Game board container & divs -->
-        <div class="container start-game" id="game-board">
+        <div class="container start-game game-container" id="game-board">
           <div data-id=0 class="box" id="box0"></div>
           <div data-id=1 class="box" id="box1"></div>
           <div data-id=2 class="box" id="box2"></div>
@@ -121,6 +132,12 @@
           <div data-id=6 class="box" id="box6"></div>
           <div data-id=7 class="box" id="box7"></div>
           <div data-id=8 class="box" id="box8"></div>
+        </div>
+      </section>
+      <section>
+        <div class="alerts-container container-fluid">
+          
+
         </div>
       </section>
     </body>

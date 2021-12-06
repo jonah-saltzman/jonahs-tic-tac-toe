@@ -1,5 +1,14 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+    display: flex; 
+    flex-direction: column;
+}
+
+#top-nav {
+    background-color: #4b93ff34;
+}
+
 // Authentication form styling
 .signup-form-group {
     margin: 7px 0
@@ -14,17 +23,21 @@
 
 // Non-board game element styling
 #game-section {
+    justify-content: center;
     margin-top: 50px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
+    //position: absolute;
+    align-content: center;
+    //left: 50%;
+    //transform: translate(-50%, 0);
+    order: 0
 }
 
 #button-div {
-    
-    position: relative;
-    left: 50%;
-    transform: translate(-25%, 0);
+    justify-items: center;
+    margin-left: 43%;
+    //position: relative;
+    //left: 50%;
+    //transform: translate(-25%, 0);
 }
 
 // Container of board spaces
@@ -34,7 +47,7 @@
     // Double-check necessity given .container rules
     margin: 0 0 0 3px;
 }
-.container{
+.game-container{
     position: relative;
     top: 20%;
     left: 50%;
@@ -43,6 +56,26 @@
     height: 450px;
     margin: 0;
     padding: 0;
+}
+
+.alerts-container {
+    background-color: rgba(156, 156, 156, 0.281);
+    //order: 5;
+    //align-self: flex-end;
+    //display: block;
+    position:absolute;
+    width:720px;
+    top:660px;
+    left:25%;
+    border-radius: 10px;
+    border-style:unset;
+    transition: visibility 0.5s;
+    transition: all 0.5s linear;
+}
+
+.alert {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 // Whole-board styling for ties & prior to game start

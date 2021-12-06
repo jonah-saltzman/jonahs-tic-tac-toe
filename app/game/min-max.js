@@ -1,7 +1,21 @@
+const alg = {
+    wins: 0,
+    losses: 0,
+    draws: 0
+}
+
 function minMaxDriver(board, playerIndex) {
+    console.log(`using minmax driver`)
+    alg.wins = 0
+    alg.losses = 0
+    alg.draws = 0
 	const player = playerIndex === 0 ? 'x' : 'o'
 	const bestMoves = findBestMove(board, player)
 	return bestMoves
+}
+
+function getMinMaxInfo() {
+    return alg
 }
 
 function findBestMove(board, player) {
@@ -35,9 +49,12 @@ function findBestMove(board, player) {
 
 function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT) {
 	const score = evaluateBoard(board, _PLAYER, _OPPONENT)
-	if (score === 10) return score - depth
-	if (score === -10) return score + depth
-	if (isGameOver(board)) return 0
+	if (score === 10) 
+        return score - depth
+	if (score === -10) 
+        return score + depth
+	if (isGameOver(board)) 
+        return 0
 	if (isMaximizer) {
 		return generateBoards(board, _PLAYER).reduce((maxScore, currentBoard) => {
 			const boardScore = minMax(
@@ -81,6 +98,7 @@ function evaluateBoard(board, _PLAYER, _OPPONENT) {
 			condition.every((pos) => board[pos] === _PLAYER)
 		)
 	) {
+        alg.wins++
 		return 10
 	}
 	if (
@@ -88,13 +106,18 @@ function evaluateBoard(board, _PLAYER, _OPPONENT) {
 			condition.every((pos) => board[pos] === _OPPONENT)
 		)
 	) {
+        alg.losses++
 		return -10
 	}
 	return 0
 }
 
 function isGameOver(board) {
-	return board.every((position) => position)
+	if (board.every((position) => position)) {
+        alg.draws++
+        return true
+    }
+    return false
 }
 
 const conditions = [
@@ -108,4 +131,4 @@ const conditions = [
 	[2, 4, 6],
 ]
 
-module.exports = {minMaxDriver}
+module.exports = {minMaxDriver, getMinMaxInfo}

@@ -19,7 +19,9 @@ const gameInfo = {
     turn: null,
     gameOver: null,
     winner: null,
+    moves: null,
     pvp: null,
+    easy: null,
     apiData: {
         game: {
             cell: {
@@ -39,17 +41,22 @@ const resetGame = () => {
     gameInfo.gameOver = null
     gameInfo.winner = null
     gameInfo.pvp = null
+    gameInfo.easy = null
     gameInfo.apiData.game.cell.index = null
     gameInfo.apiData.game.cell.value = null
     gameInfo.apiData.game.over = null
 }
 
-const startGame = (newGame, pvp) => {
+const startGame = (newGame, options) => {
     gameInfo.gameStarted = true
     gameInfo.gameID = newGame._id
     gameInfo.turn = 0
     gameInfo.gameOver = false
-    gameInfo.pvp = pvp
+    console.log(options)
+    gameInfo.pvp = options.playerSelect === 'pvp'
+    gameInfo.easy = options.difficulty === 'easy'
+    gameInfo.moves = 0
+    console.log(gameInfo)
 }
 
 const isDraw = () => {
@@ -63,6 +70,7 @@ const isDraw = () => {
 }
 
 const addMove = (player, position) => {
+    gameInfo.moves++
     board[position] = players[player]
     gameInfo.turn === 0 ? (gameInfo.turn = 1) : (gameInfo.turn = 0)
     gameInfo.apiData.game.cell.index = position

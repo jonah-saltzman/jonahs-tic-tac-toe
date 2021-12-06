@@ -1,12 +1,20 @@
 const gameData = require('./data')
 
+// class gameAlert {
+//     constructor(type,)
+// }
+
 const updateGameInfo = (alg) => {
-    console.log(alg)
+    const info = gameData.getGameInfo()
+    if (info.gameOver) {
+        $('.alerts-container')
+    }
 }
 
 const updateGameUI = () => {
     if (gameData.isGameStarted()) {
         $('.player-btn').hide(0)
+        $('.difficulty-btn').hide(0)
         $('#start-game-btn').hide(0)
         gameData.firstMoveMade()
 					? $('#reset-game-btn').attr('disabled', false)
@@ -16,6 +24,13 @@ const updateGameUI = () => {
     else {
         $('#start-game-btn').show(0)
         $('.player-btn').show(0)
+        if ($('#vs-comp-btn').prop('checked')) {
+            $('.difficulty-btn').show(0)
+            console.log('player wants to vs computer')
+        } else {
+            console.log('player wants pvp')
+            $('.difficulty-btn').hide(0)
+        }
         $('#reset-game-btn').hide(0)
     }
 }

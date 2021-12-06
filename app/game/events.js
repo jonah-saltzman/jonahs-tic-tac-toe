@@ -2,8 +2,8 @@ const gameData = require('./data')
 const gameAPI = require('./api')
 const gameUI = require('./ui')
 const store = require('../store')
-const {movesToCompare, getAlgNumbers} = require('./algorithm')
-const {minMaxDriver} = require('./min-max')
+const {easyDriver, getAlgNumbers} = require('./algorithm')
+const {minMaxDriver, getMinMaxInfo} = require('./min-max')
 const getFormFields = require('../../lib/get-form-fields')
 
 const onBoardClick = (event) => {
@@ -18,22 +18,12 @@ const onBoardClick = (event) => {
             gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                 gameUI.renderBoard()
                 gameUI.updateGameUI()
-            }).then(() => { //EASY
-                // if (!gameData.isPVP() && !gameData.isGameOver()) {
-                //     const compMoves = movesToCompare(gameData.getBoard(), gameData.getPlayer())
-                //     const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
-                //     console.log(`selected move:`)
-                //     console.log(randMove)
-                //     gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
-                //     gameAPI.updateGame(gameData.getGameInfo()).then(() => {
-                //         gameUI.renderBoard()
-                //         gameUI.updateGameUI()
-                //         gameUI.updateGameInfo(getAlgNumbers())
-                //     })
-                // }
-
+            }).then(() => { 
+                const [computerMove, getAlgInfo] = gameData.getGameInfo().easy
+                    ? [easyDriver, getAlgNumbers]
+                    : [minMaxDriver, getMinMaxInfo]
                 if (!gameData.isPVP() && !gameData.isGameOver()) {
-                    const compMoves = minMaxDriver(gameData.getBoard(), gameData.getPlayer())
+                    const compMoves = computerMove(gameData.getBoard(), gameData.getPlayer())
                     const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
                     console.log(`selected move:`)
                     console.log(randMove)
@@ -41,9 +31,11 @@ const onBoardClick = (event) => {
                     gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                         gameUI.renderBoard()
                         gameUI.updateGameUI()
-                        gameUI.updateGameInfo(getAlgNumbers())
+                        gameUI.updateGameInfo(getAlgInfo())
                     })
                 }
+            }).then(() => {
+                
             })
         }
 }
@@ -60,11 +52,11 @@ const onStartGame = (event) => {
         alert('Please login!')
         return
     }
-	const pvp = getFormFields(event.target).playerSelect
+    const gameOptions = getFormFields(event.target)
     if (!gameData.isGameStarted()) {
         gameUI.startGameUI()
         gameAPI.newGame().then((result) => {
-                gameData.startGame(result.game, pvp === 'pvp' ? true : false)
+                gameData.startGame(result.game, gameOptions)
                 gameUI.updateGameUI()
             })
     }
@@ -84,9 +76,19 @@ const onNewGame = () => {
     }
 }
 
+const onChangeVS = () => {
+    gameUI.updateGameUI()
+}
+
+const onFirstLoad = () => {
+    gameUI.updateGameUI()
+}
+
 module.exports = {
 	onBoardClick,
     onNewGame,
     onResetGame,
-    onStartGame
+    onStartGame,
+    onChangeVS,
+    onFirstLoad
 }

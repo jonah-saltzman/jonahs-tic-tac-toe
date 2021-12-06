@@ -8,6 +8,7 @@ const testing = require('./testing')
 $(() => {
     // Modal instantiation
     const authModal = new Modal($('#authModal'))
+    gameEvents.onFirstLoad()
 
     // Initially hidden elements
     $('#account-created-badge').hide(0)
@@ -23,6 +24,7 @@ $(() => {
     $('#reset-game-btn').on('click', gameEvents.onResetGame)
     $('.box').on('click', gameEvents.onBoardClick)
     // $('#start-game-btn').on('click', gameEvents.onNewGame)
+    $('.player-form-check').on('click', gameEvents.onChangeVS)
 
     // Start-game form
     $('#players-form').on('submit', gameEvents.onStartGame)

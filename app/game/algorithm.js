@@ -15,46 +15,44 @@ const alg = {
 	draws: 0,
 }
 
-function movesToCompare(board, playerIndex) {
-    debugger
-	[alg.wins, alg.losses, alg.draws] = [0, 0, 0]
+function easyDriver(board, playerIndex) {
+	console.log(`using easy driver`)
+	alg.wins = 0
+	alg.losses = 0
+	alg.draws = 0
 	const player = playerIndex === 0 ? 'x' : 'o'
-    console.log(`creating new array`)
 	const moves = []
-    console.log(moves)
-    console.log(`after logging moves`)
 	getMoves(board, player).forEach((returnedMove) => {
-        const newMoveObj = {
-            move: returnedMove
-        }
-        moves.push(newMoveObj)
-    })
-    console.log(moves)
-    console.log(`BEFORE FOREACH`)
+		const newMoveObj = {
+			move: returnedMove,
+		}
+		moves.push(newMoveObj)
+	})
 
 	moves.forEach(
 		(move) =>
-			(move.score = scoreBoard(generateBoard(board, move.move), player, player, 0))
+			(move.score = scoreBoard(
+				generateBoard(board, move.move),
+				player,
+				player,
+				0
+			))
 	)
 
 	const validMoves = moves.filter((score) => score.move.player)
-	console.log('valid moves:', validMoves)
 	const highestScore = validMoves.reduce(
 		(highScore, move) => (move.score > highScore ? move.score : highScore),
 		validMoves[0].score
 	)
-	console.log('highest score:', highestScore)
 	return validMoves.filter((move) => move.score === highestScore)
 }
-
-//function preCheck(board, moves,)
 
 function scoreBoard(board, moveBy, player, depth) {
 	const boardResult = gameOver(board, player)
 	if (boardResult !== false) {
-        if (depth === 0) return boardResult === 1 ? Infinity : (Infinity * -1)
-        return boardResult / (depth + 1)
-    }
+		if (depth === 0) return boardResult === 1 ? Infinity : Infinity * -1
+		return boardResult / (depth + 1)
+	}
 
 	const nextMover = moveBy === 'x' ? 'o' : 'x'
 
@@ -62,13 +60,11 @@ function scoreBoard(board, moveBy, player, depth) {
 		move.player ? generateBoard(board, move) : null
 	)
 
-	return boards.reduce((highest, board) => {
-		const boardScore = scoreBoard(board, nextMover, player, depth + 1)
-		if (boardScore > highest) {
-			return boardScore
-		}
-		return highest
-	})
+	return boards.reduce(
+		(score, board) =>
+			board ? score + scoreBoard(board, nextMover, player, depth + 1) : score,
+		0
+	)
 }
 
 function generateBoard(board, move) {
@@ -119,4 +115,4 @@ function getAlgNumbers() {
 	return alg
 }
 
-module.exports = { movesToCompare, getAlgNumbers }
+module.exports = { easyDriver, getAlgNumbers }

@@ -16,6 +16,7 @@ const alg = {
 }
 
 function movesToCompare(board, playerIndex) {
+    debugger
 	[alg.wins, alg.losses, alg.draws] = [0, 0, 0]
 	const player = playerIndex === 0 ? 'x' : 'o'
     console.log(`creating new array`)
@@ -51,7 +52,7 @@ function movesToCompare(board, playerIndex) {
 function scoreBoard(board, moveBy, player, depth) {
 	const boardResult = gameOver(board, player)
 	if (boardResult !== false) {
-        if (depth === 0) return boardResult === 1 ? Infinity : Infinity * -1
+        if (depth === 0) return boardResult === 1 ? Infinity : (Infinity * -1)
         return boardResult / (depth + 1)
     }
 
@@ -61,11 +62,13 @@ function scoreBoard(board, moveBy, player, depth) {
 		move.player ? generateBoard(board, move) : null
 	)
 
-	return boards.reduce(
-		(score, board) =>
-			board ? score + scoreBoard(board, nextMover, player, depth + 1) : score,
-		0
-	)
+	return boards.reduce((highest, board) => {
+		const boardScore = scoreBoard(board, nextMover, player, depth + 1)
+		if (boardScore > highest) {
+			return boardScore
+		}
+		return highest
+	})
 }
 
 function generateBoard(board, move) {

@@ -22,11 +22,10 @@ const updateGameUI = () => {
         $('.difficulty-btn').hide(0)
         $('#start-game-btn').hide(0)
         gameData.firstMoveMade()
-					? $('#reset-game-btn').attr('disabled', false)
-					: $('#reset-game-btn').attr('disabled', true)
+            ? $('#reset-game-btn').attr('disabled', false)
+            : $('#reset-game-btn').attr('disabled', true)
         $('#reset-game-btn').show(0)
-    }
-    else {
+    } else {
         $('#start-game-btn').show(0)
         $('.player-btn').show(0)
         if ($('#vs-comp-btn').prop('checked')) {
@@ -39,15 +38,16 @@ const updateGameUI = () => {
 }
 
 const renderBoard = () => {
-    if (!gameData.getWinInfo())
+    if (!gameData.getWinInfo()) {
         $('.container').removeClass('tie')
-    const board = gameData.getBoard()
-    for (const position in board) {
-        if (board[position])
-            $(`#box${position}`).text(board[position].toUpperCase())
-        else
-            $(`#box${position}`).text('').removeClass("win-position")
     }
+    for (const position in gameData.getBoard()) {
+			if (board[position]) {
+                $(`#box${position}`).text(board[position].toUpperCase())
+            } else {
+                $(`#box${position}`).text('').removeClass('win-position')
+            }
+		}
     if (gameData.isGameOver()) {
         const compWin = gameData.getPlayer()
         const winInfo = gameData.getWinInfo()
@@ -56,10 +56,10 @@ const renderBoard = () => {
         }
         else {
             winInfo[1].forEach((combo) =>
-							combo.forEach((position) =>
-								$(`#box${position}`).addClass('win-position')
-							)
-						)
+                combo.forEach((position) =>
+                    $(`#box${position}`).addClass('win-position')
+                )
+            )
         }
     }
 }

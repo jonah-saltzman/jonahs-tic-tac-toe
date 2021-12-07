@@ -65,7 +65,7 @@ is stored, changed, and used by different parts of the app. The game state can b
 to the game API in `game/api.js`, and finally, the new board state will be rendered on the UI
 by a function in `game/ui.js`. Given how many parts of the app will need to be storing, changing,
 and accessing information about the game, to prevent unintended effects & facilitate the adding
-and updating of app functionality, all information about the current game is stored in an object defined inside `game/data.js`, which is accessed, changed, and read *only* by functions defined in the same file. When a new game is started, a function in `game/data.js` called startGame() is called to add the new game information (such as difficulty setting and ID provided by the API) to the gameInfo object. When that ID and the last move is needed by another function to update the game API, getGameInfo() is called which returns a deep copy of the gameInfo object.
+and updating of app functionality, all information about the current game is stored in an object defined inside `game/data.js`, which is accessed, changed, and read *only* by functions defined in the same file. When a new game is started, a function in `game/data.js` called `startGame()` is called to add the new game information (such as difficulty setting and ID provided by the API) to the `gameInfo` object. When that ID and the last move is needed by another function to update the game API, `getGameInfo()` is called which returns a deep copy of the gameInfo object.
 
 ### Game algorithm
 

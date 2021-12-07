@@ -6,7 +6,7 @@ engineering course. MegaMax gets its name from the "mega" 5x5 game mode option a
 algorithm it uses to make the best move for the computer player. MegaMax is a single-page application
 that uses a public API for authentication, as well as for saving and updating game states. The 
 application is written entirely in JavaScript, and makes use of Bootstrap and SCSS for UI elements 
-& styling, and jQuery for dynamic UI manipulation.  
+& styling, and jQuery for dynamic UI manipulation. This project was completed in 3 days.
 
 ## Requirements
 

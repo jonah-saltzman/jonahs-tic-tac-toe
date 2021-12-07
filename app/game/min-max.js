@@ -5,7 +5,6 @@ const alg = {
 }
 
 function minMaxDriver(board, playerIndex) {
-    console.log(`using minmax driver`)
     alg.wins = 0
     alg.losses = 0
     alg.draws = 0
@@ -15,7 +14,6 @@ function minMaxDriver(board, playerIndex) {
 }
 
 function getMinMaxInfo() {
-	console.log(`returning alg:`, alg)
     return alg
 }
 

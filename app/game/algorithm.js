@@ -16,7 +16,6 @@ const alg = {
 }
 
 function easyDriver(board, playerIndex) {
-	console.log(`using easy driver`)
 	alg.wins = 0
 	alg.losses = 0
 	alg.draws = 0

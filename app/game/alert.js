@@ -1,10 +1,8 @@
 class gameAlert {
     constructor(over, info) {
-        console.log(info)
         this.classes = 'alert alert-dismissible fade show'
         this.strong = ''
         this.text = ''
-        console.log(`info.alg: ${info.alg}`)
         const totalMoves = info.alg ? info.alg.wins + info.alg.losses + info.alg.draws : null
         if (over) {
             this.strong = 'Game over!'

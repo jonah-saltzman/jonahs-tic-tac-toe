@@ -2,10 +2,7 @@ const gameData = require('./data')
 const {gameAlert} = require('./alert')
 
 const updateGameInfo = (alg) => {
-    console.log(`updateGameInfo:`)
-    console.log(gameData.getGameInfo())
     const info = {game: gameData.getGameInfo(), alg: alg ? alg : null}
-    console.log(`info.game.winner: `, info.game.winner)
     if (info.game.gameOver) {
         const gameOverAlert = new gameAlert(true, info)
         $('.alerts-container').prepend(gameOverAlert.getHtml())
@@ -34,9 +31,7 @@ const updateGameUI = () => {
         $('.player-btn').show(0)
         if ($('#vs-comp-btn').prop('checked')) {
             $('.difficulty-btn').show(0)
-            console.log('player wants to vs computer')
         } else {
-            console.log('player wants pvp')
             $('.difficulty-btn').hide(0)
         }
         $('#reset-game-btn').hide(0)
@@ -55,7 +50,6 @@ const renderBoard = () => {
     }
     if (gameData.isGameOver()) {
         const compWin = gameData.getPlayer()
-        console.log(`computer won?: `, compWin)
         const winInfo = gameData.getWinInfo()
         if (winInfo[0] === 'draw') {
             $('.container').addClass('tie')

@@ -11,28 +11,21 @@ const onBoardClick = (event) => {
         alert('Start a new game to play!')
         return
     }
-    console.log(`clicked the board`)
 	const divID = $(event.target).data('id')
     const player = gameData.getPlayer()
     if (gameData.isValidMove(divID)) {
-            console.log(`after valid move`)
             gameData.addMove(player, divID)
             gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                 gameUI.renderBoard()
                 gameUI.updateGameUI()
-            }).then(() => { 
-                console.log(`after player move api call`)
+            }).then(() => {
                 const [computerMove, getAlgInfo] = gameData.getGameInfo().easy
                     ? [easyDriver, getAlgNumbers]
                     : [minMaxDriver, getMinMaxInfo]
-                console.log(`getgameinfo: `, gameData.getGameInfo())
-                console.log(`getgameinfo.easy: `, gameData.getGameInfo().easy)
                 if (!gameData.isPVP()) {
                     if (!gameData.isGameOver()) {
                         const compMoves = computerMove(gameData.getBoard(), gameData.getPlayer())
                         const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
-                        console.log(`selected move:`)
-                        console.log(randMove)
                         gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
                         gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                             gameUI.renderBoard()

@@ -54,11 +54,9 @@ const startGame = (newGame, options) => {
     gameInfo.gameID = newGame._id
     gameInfo.turn = 0
     gameInfo.gameOver = false
-    console.log(options)
     gameInfo.pvp = options.playerSelect === 'pvp'
     gameInfo.easy = options.difficulty === 'easy'
     gameInfo.moves = 0
-    console.log(gameInfo)
 }
 
 const isDraw = () => {

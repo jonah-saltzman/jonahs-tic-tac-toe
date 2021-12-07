@@ -8,32 +8,6 @@ that uses a public API for authentication, as well as for saving and updating ga
 application is written entirely in JavaScript, and makes use of Bootstrap and SCSS for UI elements 
 & styling, and jQuery for dynamic UI manipulation. This project was completed in 3 days.
 
-## Requirements
-
-The "minimum viable project" requirements for this project are, in addition to this readme.md file:  
-
-### Application Requirements
-
-- User must be able to sign up  
-- User must be able to sign in  
-- Signed in user must be able to sign out  
-- Signed in user user must be able to start a tic tac toe game  
-- When playing game, user must start as X and then rotate between X and O  
-- When playing game, user must only select available spaces on the board  
-- When playing game, user must be notified of win or tie  
-- Once a game is over, user must not be able to add to that board  
-- Once a game is over, user must be able to play again  
-
-### API Requirements
-
-- Sign up (`POST /sign-up`)
-- Sign in (`POST /sign-in`)
-- Sign out (`DELETE /sign-out`)
-- New game (`POST /games`)
-- Update game (`PATCH /games/:id`)
-- Display a message to the user after sign in, sign up, and sign out success or failure.
-- Sign in and sign up forms must clear after submit success
-
 ## Application
 
 The MegaMax application consists of: 
@@ -78,6 +52,32 @@ will make the best move for the player, which is also the worst move for the com
 Finally, the version of the minmax algorithm that is used for the computer player on the 
 5x5 board implements alpha-beta pruning (without this optimization, early moves with an open
 board took several minutes to compute).
+
+## Requirements
+
+The "minimum viable project" requirements for this project are, in addition to this readme.md file:  
+
+### Application Requirements
+
+- User must be able to sign up  
+- User must be able to sign in  
+- Signed in user must be able to sign out  
+- Signed in user user must be able to start a tic tac toe game  
+- When playing game, user must start as X and then rotate between X and O  
+- When playing game, user must only select available spaces on the board  
+- When playing game, user must be notified of win or tie  
+- Once a game is over, user must not be able to add to that board  
+- Once a game is over, user must be able to play again  
+
+### API Requirements
+
+- Sign up (`POST /sign-up`)
+- Sign in (`POST /sign-in`)
+- Sign out (`DELETE /sign-out`)
+- New game (`POST /games`)
+- Update game (`PATCH /games/:id`)
+- Display a message to the user after sign in, sign up, and sign out success or failure.
+- Sign in and sign up forms must clear after submit success
 
 ## User stories
 

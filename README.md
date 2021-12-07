@@ -75,6 +75,10 @@ decisions according to the first algorithm I wrote, prior to researching the sub
 The way I wrote this algorithm is naive, in that when selecting the "best" move at each branch in the decision tree, while it selects the best move for the computer when it is simulating computer moves, it *also* selects the best move for the computer when simulating player moves. Thus, this "easy" algorithm makes the best move for the computer, *assuming that the player will also make the best move for the computer*, which is in fact the worst move for the computer. This problem is addressed in my implementation of the MinMax algorithm, which is what is used for the "hard" mode. The MinMax algorithm chooses the best move for the computer while assuming that the player
 will make the best move for the player, which is also the worst move for the computer. In "hard" mode, if the player always makes the best move, the game will always draw (on a 3x3 board).
 
+Finally, the version of the minmax algorithm that is used for the computer player on the 
+5x5 board implements alpha-beta pruning (without this optimization, early moves with an open
+board took several minutes to compute).
+
 ## User stories
 
 The user stories I wrote before starting the project are as follows:

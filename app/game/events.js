@@ -8,12 +8,7 @@ const {alphaBetaDriver, getABInfo} = require('./alphabeta')
 const getFormFields = require('../../lib/get-form-fields')
 
 const onBoardClick = (event) => {
-    if (!gameData.isGameStarted()) {
-        alert('Start a new game to play!')
-        return
-    }
 	const divID = $(event.target).data('id')
-    console.log(`clicked divID:`, divID)
     const player = gameData.getPlayer()
     if (gameData.isValidMove(divID) && gameData.isBoardSmall()) {
             gameData.addMove(player, divID)
@@ -71,18 +66,14 @@ const onStartGame = (event) => {
     gameData.clearBoards()
     gameUI.renderBoard()
     const gameOptions = getFormFields(event.target)
-    console.log('game options: ', gameOptions, "boardselect === 'three': ", gameOptions.boardSelect === 'three')
     const smallBoard = gameOptions.boardSelect === 'three'
-    console.log('smallBoard: ', smallBoard)
     if (!gameData.isGameStarted() && smallBoard) {
-        console.log(`inside !started && small=true`)
         gameUI.startGameUI()
         gameAPI.newGame().then((result) => {
                 gameData.startGame(result.game, gameOptions)
                 gameUI.updateGameUI()
             })
     } else {
-        console.log(`inside else`)
         gameUI.startGameUI()
         gameData.startGame(false, gameOptions)
         gameUI.updateGameUI()

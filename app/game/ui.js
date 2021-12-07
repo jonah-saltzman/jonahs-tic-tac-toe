@@ -51,25 +51,18 @@ const updateGameUI = () => {
 const renderBoard = () => {
     if (!gameData.getWinInfo()) {
         $('.container').removeClass('tie')
-        const noWinBoard = gameData.getBoard()
-        console.log('no win board: ', noWinBoard)
         $(`.box`).text('').removeClass('win-position')
     }
     const board = gameData.getBoard()
     const prefix = board.length === 9 ? '' : 'five'
-    console.log(`board.length: `, board.length)
-    console.log(`prefix: ${prefix} (after prefix)`)
     for (const position in board) {
 			if (board[position]) {
                 $(`#${prefix}box${position}`).text(board[position].toUpperCase())
-            } else {
-                $(`#${prefix}box${position}`).text('').removeClass('win-position')
             }
 		}
     if (gameData.isGameOver()) {
         const compWin = gameData.getPlayer()
         const winInfo = gameData.getWinInfo()
-        console.log(winInfo)
         if (winInfo[0] === 'draw') {
             if (gameData.isBoardSmall()) {
                 $('.container').addClass('tie')

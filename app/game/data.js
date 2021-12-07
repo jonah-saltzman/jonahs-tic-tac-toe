@@ -84,15 +84,12 @@ const resetGame = () => {
 
 const startGame = (newGame, options) => {
     gameInfo.gameID = newGame ? newGame._id : false
-    console.log('new gameID:', gameInfo.gameID)
-    console.log(options)
     gameInfo.gameStarted = true
     gameInfo.turn = 0
     gameInfo.gameOver = false
     gameInfo.pvp = options.playerSelect === 'pvp'
     gameInfo.easy = options.difficulty === 'easy'
     gameInfo.small = options.boardSelect === 'three'
-    console.log('new game small:', gameInfo.small)
     gameInfo.moves = 0
 }
 

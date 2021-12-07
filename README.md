@@ -1,40 +1,47 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# browser-template
+# MegaMax Tic-Tac-Toe
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+This is MegaMax, a tic-tac-toe game client & my first project for  
+the General Assembly software engineering course. MegaMax gets its  
+name from the "mega" 5x5 game mode option and the MinMax algorithm  
+it uses to make the best move for the computer player. MegaMax is  
+a single-page application that uses a public API for authentication,  
+as well as for saving and updating game states. The application  
+is written entirely in JavaScript, and makes use of Bootstrap and  
+SCSS for UI elements & styling, and jQuery for dynamic UI manipulation.  
 
-## Installation
+## Requirements
 
-1. [Download](../../archive/main.zip) this template.
-    - **Do Not Fork And Clone**
-    - Click the "Clone or Download" button and select "Download Zip".
-1. Move to the `sei/projects` directory, then unzip the template directory with
-    `unzip /Users/<user-name>/Downloads/browser-template-main.zip`.
-1. Rename the template directory from `browser-template-main` to
-    `<project-name>-client`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace all instances of `jonahs-tic-tac-toe` with the name of
-    your project.
-    - You can search for all instances of text in Atom by pressing
-    `commant + shift + f` on Mac or `ctrl + shift + f` on WSL.
-1. Move into the new project and `git init`.
-1. Add all of the files in your project with the command `git add --all`.
-      - **Note: This is the only time you should run this command!**
-1. Commit all of your files with the command `git commit`.
-      - Your commit title should read `Initial commit`.
-1. Install dependencies with `npm install`.
-1. Create a new repository on [github.com](https://github.com),
-    _not GitHub Enterprise_.
-1. Name the new repository with the same name used on Step 3.
-1. Follow the instructions on your new repository's setup page. For details on
-   how to push to Github, refer to the section on Github entitled **"…or push an existing
-   repository from the command line."** Further documentation can be found [here](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
-   > **Note:** This last step will rename your default branch to **main**. This branch name will be used when deploying.
+The "minimum viable project" requirements for this project are, in  
+addition to this readme.md file:  
+
+### Application Requirements
+
+- User must be able to sign up  
+- User must be able to sign in  
+- Signed in user must be able to sign out  
+- Signed in user user must be able to start a tic tac toe game  
+- When playing game, user must start as X and then rotate between X and O  
+- When playing game, user must only select available spaces on the board  
+- When playing game, user must be notified of win or tie  
+- Once a game is over, user must not be able to add to that board  
+- Once a game is over, user must be able to play again  
+
+### API Requirements
+
+- Sign up (`POST /sign-up`)
+- Sign in (`POST /sign-in`)
+- Sign out (`DELETE /sign-out`)
+- New game (`POST /games`)
+- Update game (`PATCH /games/:id`)
+- Display a message to the user after sign in, sign up, and  
+sign out success or failure.
+- Sign in and sign up forms must clear after submit success
 
 ## Structure
+
+The MegaMax application consists of an `index.html` file containing  
+initial UI
 
 ### App
 

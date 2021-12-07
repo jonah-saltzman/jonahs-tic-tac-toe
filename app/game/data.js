@@ -115,9 +115,9 @@ const getPlayer = () => gameInfo.turn
 
 const isValidMove = (position) => !(isGameOver() || board[position])
 
-const getBoard = () => board
+const getBoard = () => [...board]
 
-const getGameInfo = () => gameInfo
+const getGameInfo = () => JSON.parse(JSON.stringify(gameInfo))
 
 const getWinInfo = () => (gameInfo.winner === 'draw')
                             ? ['draw', [...board]]

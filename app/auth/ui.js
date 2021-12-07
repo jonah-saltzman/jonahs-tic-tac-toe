@@ -37,6 +37,7 @@ const showAuthedUI = () => {
     $('.difficulty-form-check').show(0)
     $('.player-form-check').show(0)
     $('.board-form-check').show(0)
+    $('#signed-out-badge').hide(0)
 }
 const hideAuthedUI = () => {
     $('.player-form-check').hide(0)
@@ -48,7 +49,8 @@ const hideAuthedUI = () => {
 }
 
 const signoutMessage = (email) => {
-    $('#signed-in-badge').text(`Goodbye, ${email}!`)
+    $('#signed-out-badge').text(`Goodbye, ${email}!`)
+    $('#signed-out-badge').show(0)
 }
 
 const clearAuthMessages = () => {

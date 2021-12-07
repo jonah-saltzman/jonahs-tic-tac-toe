@@ -56,11 +56,11 @@ const onBoardClick = (event) => {
 
 const onResetGame = () => {
     gameData.clearBoards()
-    gameUI.renderBoard()
     gameData.resetGame()
+    gameUI.clearGameInfo()
     gameUI.updateGameUI()
     gameUI.renderBoard()
-    gameUI.clearGameInfo()
+    gameUI.updateGameUI()
 }
 
 const onStartGame = (event) => {

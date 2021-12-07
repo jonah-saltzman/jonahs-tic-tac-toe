@@ -51,6 +51,9 @@ const updateGameUI = () => {
 const renderBoard = () => {
     if (!gameData.getWinInfo()) {
         $('.container').removeClass('tie')
+        const noWinBoard = gameData.getBoard()
+        console.log('no win board: ', noWinBoard)
+        $(`.box`).text('').removeClass('win-position')
     }
     const board = gameData.getBoard()
     const prefix = board.length === 9 ? '' : 'five'
@@ -66,6 +69,7 @@ const renderBoard = () => {
     if (gameData.isGameOver()) {
         const compWin = gameData.getPlayer()
         const winInfo = gameData.getWinInfo()
+        console.log(winInfo)
         if (winInfo[0] === 'draw') {
             if (gameData.isBoardSmall()) {
                 $('.container').addClass('tie')

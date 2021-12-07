@@ -46,7 +46,7 @@ const gameInfo = {
     pvp: null,
     easy: null,
     lastMove: null,
-    small: null,
+    small: true,
     apiData: {
         game: {
             cell: {
@@ -73,7 +73,7 @@ const resetGame = () => {
     gameInfo.pvp = null
     gameInfo.easy = null
     gameInfo.lastMove = null
-    gameInfo.small = null
+    gameInfo.small = true
     gameInfo.apiData.game.cell.index = null
     gameInfo.apiData.game.cell.value = null
     gameInfo.apiData.game.over = null
@@ -144,6 +144,10 @@ function checkWinner() {
     return (allWins.length) ? [board[allWins[0]], allWins] : false
 }
 
+const getSmallBoard = () => [...smallBoard]
+
+const getBigBoard = () => [...bigBoard]
+
 const isPVP = () => gameInfo.pvp
 
 const isGameStarted = () => gameInfo.gameStarted
@@ -197,5 +201,7 @@ module.exports = {
     isPVP,
     isBoardSmall,
     isPrevGameSmall,
-    clearBoards
+    clearBoards,
+    getSmallBoard,
+    getBigBoard
 }

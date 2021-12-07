@@ -2,7 +2,10 @@ const gameData = require('./data')
 const {gameAlert} = require('./alert')
 
 const updateGameInfo = (alg) => {
+    console.log(`updateGameInfo:`)
+    console.log(gameData.getGameInfo())
     const info = {game: gameData.getGameInfo(), alg: alg ? alg : null}
+    console.log(`info.game.winner: `, info.game.winner)
     if (info.game.gameOver) {
         const gameOverAlert = new gameAlert(true, info)
         $('.alerts-container').prepend(gameOverAlert.getHtml())
@@ -10,6 +13,10 @@ const updateGameInfo = (alg) => {
         const compMoveAlert = new gameAlert(false, info)
         $('.alerts-container').prepend(compMoveAlert.getHtml())
     }
+}
+
+const clearGameInfo = () => {
+    $('.alerts-container').empty()
 }
 
 const updateGameUI = () => {
@@ -72,5 +79,6 @@ module.exports = {
 	renderBoard,
 	startGameUI,
 	logoutGameUI,
-    updateGameInfo
+    updateGameInfo,
+    clearGameInfo
 }

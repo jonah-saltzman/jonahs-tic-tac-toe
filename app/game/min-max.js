@@ -15,6 +15,7 @@ function minMaxDriver(board, playerIndex) {
 }
 
 function getMinMaxInfo() {
+	console.log(`returning alg:`, alg)
     return alg
 }
 
@@ -56,10 +57,10 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT) {
 	if (isGameOver(board)) 
         return 0
 
-	// generate boards depending on isMaximizer
+	const boards = generateBoards(board, isMaximizer ? _PLAYER : _OPPONENT)
 
 	if (isMaximizer) {
-		return generateBoards(board, _PLAYER).reduce((maxScore, currentBoard) => {
+		return boards.reduce((maxScore, currentBoard) => {
 			const boardScore = minMax(
 				currentBoard,
 				depth + 1,
@@ -70,7 +71,7 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT) {
 			return boardScore > maxScore ? boardScore : maxScore
 		}, Number.NEGATIVE_INFINITY)
 	} else {
-		return generateBoards(board, _OPPONENT).reduce((minScore, currentBoard) => {
+		return boards.reduce((minScore, currentBoard) => {
 			const boardScore = minMax(
 				currentBoard,
 				depth + 1,

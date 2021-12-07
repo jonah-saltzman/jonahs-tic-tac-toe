@@ -11,32 +11,38 @@ const onBoardClick = (event) => {
         alert('Start a new game to play!')
         return
     }
+    console.log(`clicked the board`)
 	const divID = $(event.target).data('id')
     const player = gameData.getPlayer()
     if (gameData.isValidMove(divID)) {
+            console.log(`after valid move`)
             gameData.addMove(player, divID)
             gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                 gameUI.renderBoard()
                 gameUI.updateGameUI()
-                gameUI.updateGameInfo()
             }).then(() => { 
+                console.log(`after player move api call`)
                 const [computerMove, getAlgInfo] = gameData.getGameInfo().easy
                     ? [easyDriver, getAlgNumbers]
                     : [minMaxDriver, getMinMaxInfo]
-                if (!gameData.isPVP() && !gameData.isGameOver()) {
-                    const compMoves = computerMove(gameData.getBoard(), gameData.getPlayer())
-                    const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
-                    console.log(`selected move:`)
-                    console.log(randMove)
-                    gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
-                    gameAPI.updateGame(gameData.getGameInfo()).then(() => {
-                        gameUI.renderBoard()
-                        gameUI.updateGameUI()
-                        gameUI.updateGameInfo(getAlgInfo())
-                    })
+                console.log(`getgameinfo: `, gameData.getGameInfo())
+                console.log(`getgameinfo.easy: `, gameData.getGameInfo().easy)
+                if (!gameData.isPVP()) {
+                    if (!gameData.isGameOver()) {
+                        const compMoves = computerMove(gameData.getBoard(), gameData.getPlayer())
+                        const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
+                        console.log(`selected move:`)
+                        console.log(randMove)
+                        gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
+                        gameAPI.updateGame(gameData.getGameInfo()).then(() => {
+                            gameUI.renderBoard()
+                            gameUI.updateGameUI()
+                            gameUI.updateGameInfo(getAlgInfo())
+                        })
+                    }
+                } else {
+                    gameUI.updateGameInfo()
                 }
-            }).then(() => {
-                
             })
         }
 }
@@ -45,6 +51,7 @@ const onResetGame = () => {
     gameData.resetGame()
     gameUI.updateGameUI()
     gameUI.renderBoard()
+    gameUI.clearGameInfo()
 }
 
 const onStartGame = (event) => {

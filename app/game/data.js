@@ -120,7 +120,7 @@ const getBoard = () => board
 const getGameInfo = () => gameInfo
 
 const getWinInfo = () => (gameInfo.winner === 'draw')
-                            ? ['draw', board]
+                            ? ['draw', [...board]]
                             : checkWinner(board, conditions)        
 
 module.exports = {

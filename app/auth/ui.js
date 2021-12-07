@@ -35,8 +35,10 @@ const showAuthedUI = () => {
     $('#signed-in-account').show(0)
     $('#signout-button').show(0)
     $('.difficulty-form-check').show(0)
+    $('.player-form-check').show(0)
 }
 const hideAuthedUI = () => {
+    $('.player-form-check').hide(0)
     $('#launch-authModal').show(0)
     $('#signed-in-account').hide(0)
     $('#signout-button').hide(0)

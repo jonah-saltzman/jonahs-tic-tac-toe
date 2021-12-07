@@ -6,41 +6,19 @@ body {
     background-color: #0d6dfd25;
 }
 
-label > input[type="radio"] {
-  display: none;
-}
-label > input[type="radio"] + *::before {
-  content: "";
-  display: inline-block;
-  vertical-align: bottom;
-  width: 1rem;
-  height: 1rem;
-  margin-right: 0.3rem;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 0.1rem;
-  border-color: gray;
-}
-label > input[type="radio"]:checked + * {
-  color: teal;
-}
-label > input[type="radio"]:checked + *::before {
-  background: radial-gradient(teal 0%, teal 40%, transparent 50%, transparent);
-  border-color: teal;
-}
-.white-btn {
-    color: white
-}
-
+// Navbar
 .navbar-brand {
     color:rgb(255, 255, 255)
 }
-
 #top-nav {
     background-color: #4b93ff;
 }
 
 // Authentication form styling
+
+.white-btn {
+    color: white
+}
 .signup-form-group {
     margin: 7px 0
 }
@@ -56,26 +34,31 @@ label > input[type="radio"]:checked + *::before {
 #game-section {
     justify-content: center;
     margin-top: 50px;
-    //position: absolute;
     align-content: center;
-    //left: 50%;
-    //transform: translate(-50%, 0);
     order: 0
 }
-
 #button-div {
     justify-items: center;
-    margin-left: 43%;
-    //position: relative;
-    //left: 50%;
-    //transform: translate(-25%, 0);
+    margin-left: 46.5%;
+}
+.alerts-container {
+    background-color: rgba(156, 156, 156, 0.281);
+    position:absolute;
+    width:720px;
+    top:660px;
+    left:25%;
+    border-radius: 10px;
+    border-style:unset;
+    transition: visibility 0.5s;
+    transition: all 0.5s linear;
+}
+.alert {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 // Container of board spaces
-
-
 #game-board {
-    // Double-check necessity given .container rules
     margin: 0 0 0 3px;
 }
 .game-container{
@@ -87,26 +70,6 @@ label > input[type="radio"]:checked + *::before {
     height: 450px;
     margin: 0;
     padding: 0;
-}
-
-.alerts-container {
-    background-color: rgba(156, 156, 156, 0.281);
-    //order: 5;
-    //align-self: flex-end;
-    //display: block;
-    position:absolute;
-    width:720px;
-    top:660px;
-    left:25%;
-    border-radius: 10px;
-    border-style:unset;
-    transition: visibility 0.5s;
-    transition: all 0.5s linear;
-}
-
-.alert {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 // Whole-board styling for ties & prior to game start

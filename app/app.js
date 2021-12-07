@@ -11,6 +11,7 @@ $(() => {
     gameEvents.onFirstLoad()
 
     // Initially hidden elements
+    $('.player-form-check').hide(0)
     $('#account-created-badge').hide(0)
     $('#signin-failed-badge').hide(0)
     $('#signup-failed-badge').hide(0)

@@ -25,13 +25,12 @@ function findBestMove(board, player) {
 			if (!position) {
 				const newBoard = [...board]
 				newBoard[index] = _PLAYER
-				const newScore = minMax(newBoard, 0, false, _PLAYER, _OPPONENT)
 				return {
 					move: {
-						player: player,
+						player: _PLAYER,
 						toIndex: index,
 					},
-					score: newScore,
+					score: minMax(newBoard, 0, false, _PLAYER, _OPPONENT),
 				}
 			}
 		})
@@ -41,16 +40,19 @@ function findBestMove(board, player) {
 		return move.score > highScore ? move.score : highScore
 	}, Number.NEGATIVE_INFINITY)
 
-	const allBestMoves = moves.filter((move) => move.score === bestMoveScore)
-
-	return allBestMoves
+	return moves.filter((move) => move.score === bestMoveScore)
 }
 
 function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT) {
 	const score = evaluateBoard(board, _PLAYER, _OPPONENT)
-	if (score === 10) return score - depth
-	if (score === -10) return score + depth
-	if (isGameOver(board)) return 0
+	if (score) {
+		return score > 0 
+			? score - depth 
+			: score + depth
+	}
+	if (isGameOver(board)) {
+		return 0
+	}
 
 	if (isMaximizer) {
 		return generateBoards(board, _PLAYER).reduce((maxScore, currentBoard) => {

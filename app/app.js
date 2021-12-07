@@ -3,7 +3,6 @@
 const authEvents = require('./auth/events')
 const gameEvents = require('./game/events')
 const Modal = require('bootstrap').Modal
-const testing = require('./testing')
 
 $(() => {
     // Modal instantiation

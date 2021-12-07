@@ -52,6 +52,11 @@ body {
     transition: visibility 0.5s;
     transition: all 0.5s linear;
 }
+
+.alerts-container-big {
+    top: 990px;
+}
+
 .alert {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -68,6 +73,17 @@ body {
     transform: translate(-50%, 10%);
 	width: 450px;
     height: 450px;
+    margin: 0;
+    padding: 0;
+}
+
+.five-game-container{
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+	width: 750px;
+    height: 750px;
     margin: 0;
     padding: 0;
 }
@@ -103,6 +119,38 @@ body {
 .win-position {
     background-color: rgba(19, 219, 19, 0.657);
     pointer-events: none;
+}
+
+.box-top {
+    border-top: 0;
+}
+
+.box-right {
+    border-right: 0;
+}
+
+.box-bottom {
+    border-bottom: 0;
+}
+
+.box-left {
+    border-left: 0;
+}
+
+.box-top.box-left {
+    border-radius: 35px 0 0 0;
+}
+
+.box-top.box-right {
+    border-radius: 0 35px 0 0;
+}
+
+.box-bottom.box-right {
+    border-radius: 0 0 35px 0;
+}
+
+.box-bottom.box-left {
+    border-radius: 0 0 0 35px;
 }
 
 // Individual box border styling

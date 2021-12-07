@@ -21,14 +21,25 @@ const updateGameUI = () => {
         $('.player-btn').hide(0)
         $('.difficulty-btn').hide(0)
         $('#start-game-btn').hide(0)
+        $('.board-btn').hide(0)
         gameData.firstMoveMade()
             ? $('#reset-game-btn').attr('disabled', false)
             : $('#reset-game-btn').attr('disabled', true)
         $('#reset-game-btn').show(0)
+        if (gameData.isBoardSmall()) {
+            $('.three-container').show(0)
+            $('.five-container').hide(0)
+            $('.alerts-container').removeClass('alerts-container-big')
+        } else {
+            $('.three-container').hide(0)
+            $('.five-container').show(0)
+            $('.alerts-container').addClass('alerts-container-big')
+        }
     } else {
         $('#start-game-btn').show(0)
+        $('.board-btn').show(0)
         $('.player-btn').show(0)
-        if ($('#vs-comp-btn').prop('checked')) {
+        if ($('#vs-comp-btn').prop('checked') && !$('#five-btn').prop('checked')) {
             $('.difficulty-btn').show(0)
         } else {
             $('.difficulty-btn').hide(0)
@@ -41,32 +52,46 @@ const renderBoard = () => {
     if (!gameData.getWinInfo()) {
         $('.container').removeClass('tie')
     }
-    for (const position in gameData.getBoard()) {
+    const board = gameData.getBoard()
+    const prefix = board.length === 9 ? '' : 'five'
+    console.log(`board.length: `, board.length)
+    console.log(`prefix: ${prefix} (after prefix)`)
+    for (const position in board) {
 			if (board[position]) {
-                $(`#box${position}`).text(board[position].toUpperCase())
+                $(`#${prefix}box${position}`).text(board[position].toUpperCase())
             } else {
-                $(`#box${position}`).text('').removeClass('win-position')
+                $(`#${prefix}box${position}`).text('').removeClass('win-position')
             }
 		}
     if (gameData.isGameOver()) {
         const compWin = gameData.getPlayer()
         const winInfo = gameData.getWinInfo()
         if (winInfo[0] === 'draw') {
-            $('.container').addClass('tie')
+            if (gameData.isBoardSmall()) {
+                $('.container').addClass('tie')
+            } else {
+                $('.five-container').addClass('tie')
+            }
         }
         else {
             winInfo[1].forEach((combo) =>
                 combo.forEach((position) =>
-                    $(`#box${position}`).addClass('win-position')
+                    $(`#${prefix}box${position}`).addClass('win-position')
                 )
             )
         }
     }
 }
 
-const startGameUI = () => $('.container').removeClass('start-game')
+const startGameUI = () => {
+    $('.container').removeClass('start-game')
+    $('.five-container').removeClass('start-game')
+}
 
-const logoutGameUI = () => $('.container').addClass('start-game')
+const logoutGameUI = () => {
+    $('.container').addClass('start-game')
+    $('.five-container').addClass('start-game')
+}
 
 module.exports = {
 	updateGameUI,

@@ -36,6 +36,7 @@ const showAuthedUI = () => {
     $('#signout-button').show(0)
     $('.difficulty-form-check').show(0)
     $('.player-form-check').show(0)
+    $('.board-form-check').show(0)
 }
 const hideAuthedUI = () => {
     $('.player-form-check').hide(0)
@@ -43,10 +44,11 @@ const hideAuthedUI = () => {
     $('#signed-in-account').hide(0)
     $('#signout-button').hide(0)
     $('.difficulty-form-check').hide(0)
+    $('.board-form-check').hide(0)
 }
 
 const signoutMessage = (email) => {
-    alert(`Goodbye, ${email}!`)
+    $('#signed-in-badge').text(`Goodbye, ${email}!`)
 }
 
 const clearAuthMessages = () => {
@@ -107,6 +109,7 @@ const clearForms = () => {
 const enableNewGame = () => {
     $('#start-game-btn').attr('disabled', false)
     $('.player-btn').attr('disabled', false)
+    $('.alerts-container').empty()
 }
 
 // Remove current-user badge
@@ -134,5 +137,6 @@ module.exports = {
 	passwordMatchFail,
     setSignupEmail,
     showModal,
-    hideModal
+    hideModal,
+    showAuthedUI
 }

@@ -40,10 +40,6 @@
                     <label for="signin-password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="signin-password" name="signinform[password]">
                   </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="signin-remember" name="signinform[remember]">
-                    <label class="form-check-label" for="signin-remember">Stay signed in</label>
-                  </div>
                 </form>
               </section>
             <!-- MODAL register content -->
@@ -98,6 +94,18 @@
                 <button id="start-game-btn" class="btn btn-success" type="submit" form="players-form" disabled>New Game</button>
                 <button id="reset-game-btn" class="btn btn-success" type="button" disabled>Reset Game</button>
               </div>
+
+              <div class="col-auto">
+                <div class="board-form-check">
+                  <input class="form-check-input board-btn radio" type="radio" name="boardSelect" id="three-btn" value="three" checked>
+                  <label class="form-check-label board-btn" for="pvp-btn">3x3 Board</label>
+                </div>
+                <div class="board-form-check">
+                  <input class="form-check-input board-btn radio" type="radio" name="boardSelect" id="five-btn" value="five">
+                  <label class="form-check-label board-btn" for="vs-comp-btn">5x5 Board</label>
+                </div>
+              </div>
+
               <div class="col-auto">
                 <div class="player-form-check">
                   <input class="form-check-input player-btn radio" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked disabled>
@@ -122,7 +130,7 @@
           </form>
         </div>
         <!-- Game board container & divs -->
-        <div class="container start-game game-container" id="game-board">
+        <div class="container start-game game-container three-container" id="game-board">
           <div data-id=0 class="box" id="box0"></div>
           <div data-id=1 class="box" id="box1"></div>
           <div data-id=2 class="box" id="box2"></div>
@@ -133,11 +141,36 @@
           <div data-id=7 class="box" id="box7"></div>
           <div data-id=8 class="box" id="box8"></div>
         </div>
+        <div class="container start-game five-game-container five-container" id="five-game-board">
+          <div data-id=0 class="box box-top box-left" id="fivebox0"></div>
+          <div data-id=1 class="box box-top" id="fivebox1"></div>
+          <div data-id=2 class="box box-top" id="fivebox2"></div>
+          <div data-id=3 class="box box-top" id="fivebox3"></div>
+          <div data-id=4 class="box box-top box-right" id="fivebox4"></div>
+          <div data-id=5 class="box box-left" id="fivebox5"></div>
+          <div data-id=6 class="box" id="fivebox6"></div>
+          <div data-id=7 class="box" id="fivebox7"></div>
+          <div data-id=8 class="box" id="fivebox8"></div>
+          <div data-id=9 class="box box-right" id="fivebox9"></div>
+          <div data-id=10 class="box box-left" id="fivebox10"></div>
+          <div data-id=11 class="box" id="fivebox11"></div>
+          <div data-id=12 class="box" id="fivebox12"></div>
+          <div data-id=13 class="box" id="fivebox13"></div>
+          <div data-id=14 class="box box-right" id="fivebox14"></div>
+          <div data-id=15 class="box box-left" id="fivebox15"></div>
+          <div data-id=16 class="box" id="fivebox16"></div>
+          <div data-id=17 class="box" id="fivebox17"></div>
+          <div data-id=18 class="box" id="fivebox18"></div>
+          <div data-id=19 class="box box-right" id="fivebox19"></div>
+          <div data-id=20 class="box box-bottom box-left" id="fivebox20"></div>
+          <div data-id=21 class="box box-bottom" id="fivebox21"></div>
+          <div data-id=22 class="box box-bottom" id="fivebox22"></div>
+          <div data-id=23 class="box box-bottom" id="fivebox23"></div>
+          <div data-id=24 class="box box-bottom box-right" id="fivebox24"></div>
+        </div>
       </section>
       <section>
         <div class="alerts-container container-fluid">
-          
-
         </div>
       </section>
     </body>

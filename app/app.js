@@ -2,15 +2,20 @@
 // Requires
 const authEvents = require('./auth/events')
 const gameEvents = require('./game/events')
+const testing = require('./testing')
 const Modal = require('bootstrap').Modal
+const authUI = require('./auth/ui')
 
 $(() => {
     // Modal instantiation
+
     const authModal = new Modal($('#authModal'))
     gameEvents.onFirstLoad()
 
     // Initially hidden elements
+    $('.five-container').hide(0)
     $('.player-form-check').hide(0)
+    $('.board-form-check').hide(0)
     $('#account-created-badge').hide(0)
     $('#signin-failed-badge').hide(0)
     $('#signup-failed-badge').hide(0)
@@ -25,6 +30,7 @@ $(() => {
     $('.box').on('click', gameEvents.onBoardClick)
     // $('#start-game-btn').on('click', gameEvents.onNewGame)
     $('.player-form-check').on('click', gameEvents.onChangeVS)
+    $('.board-form-check').on('click', gameEvents.onChangeVS)
 
     // Start-game form
     $('#players-form').on('submit', gameEvents.onStartGame)
@@ -39,4 +45,8 @@ $(() => {
     // On-submits (auth forms)
     $('#authmodal-signin-form').on('submit', event => {authEvents.onSigninSubmit(event, authModal)})
     $('#authmodal-signup-form').on('submit', event => {authEvents.onRegister(event, authModal)})
+
+    if (testing) {
+			authUI.showAuthedUI()
+		}
 })

@@ -2,12 +2,14 @@ const alg = {
 	wins: 0,
 	losses: 0,
 	draws: 0,
+	moves: 0
 }
 
 function alphaBetaDriver(board, playerIndex) {
 	alg.wins = 0
 	alg.losses = 0
 	alg.draws = 0
+	alg.moves = 0
 	const player = playerIndex === 0 ? 'x' : 'o'
 	const bestMoves = findBestMove(board, player)
 	return bestMoves
@@ -52,6 +54,7 @@ function findBestMove(board, player) {
 }
 
 function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT, alpha, beta) {
+	alg.moves++
 	const score = evaluateBoard(board, _PLAYER, _OPPONENT)
 	if (score) {
 		return score > 0 ? score - depth : score + depth

@@ -13,12 +13,14 @@ const alg = {
 	wins: 0,
 	losses: 0,
 	draws: 0,
+	moves: 0
 }
 
 function easyDriver(board, playerIndex) {
 	alg.wins = 0
 	alg.losses = 0
 	alg.draws = 0
+	alg.moves = 0
 	const player = playerIndex === 0 ? 'x' : 'o'
 	const moves = []
 	getMoves(board, player).forEach((returnedMove) => {
@@ -47,6 +49,7 @@ function easyDriver(board, playerIndex) {
 }
 
 function scoreBoard(board, moveBy, player, depth) {
+	alg.moves++
 	const boardResult = gameOver(board, player)
 	if (boardResult !== false) {
 		if (depth === 0) return boardResult === 1 ? Infinity : Infinity * -1

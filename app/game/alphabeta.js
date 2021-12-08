@@ -10,9 +10,15 @@ function alphaBetaDriver(board, playerIndex) {
 	alg.losses = 0
 	alg.draws = 0
 	alg.moves = 0
-	const player = playerIndex === 0 ? 'x' : 'o'
-	const bestMoves = findBestMove(board, player)
-	return bestMoves
+	return new Promise((resolve, reject) => {
+		const player = playerIndex === 0 ? 'x' : 'o'
+		const bestMoves = findBestMove(board, player)
+		if (bestMoves.length) {
+			resolve(bestMoves)
+		} else {
+			reject('error')
+		}
+	})
 }
 
 function getABInfo() {
@@ -85,7 +91,7 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT, alpha, beta) {
 			)
 			alpha = Math.max(alpha, maxScore)
 			if (maxScore >= beta) {
-				console.log('pruning')
+				// console.log('pruning')
 				break
 			}
 		}
@@ -109,7 +115,7 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT, alpha, beta) {
 			)
 			beta = Math.min(beta, minScore)
 			if (minScore <= alpha) {
-				console.log('pruning')
+				//console.log('pruning')
 				break
 			}
 		}

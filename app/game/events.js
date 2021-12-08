@@ -64,14 +64,20 @@ const onBoardClick = (event) => {
                         randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
                     }
                     gameData.addMove(gameData.getPlayer(), randMove)
+                    gameUI.renderBoard()
+                    gameUI.updateGameUI()
+                    gameUI.updateGameInfo(getABInfo())
                 } else {
-                    const compMoves = alphaBetaDriver(gameData.getBoard(), gameData.getPlayer())
-                    const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
-                    gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
+                    console.log('using promise')
+                    alphaBetaDriver(gameData.getBoard(), gameData.getPlayer())
+                        .then(moves => {
+                            const randMove = moves[Math.floor(Math.random() * moves.length)]
+                            gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
+                            gameUI.renderBoard()
+                            gameUI.updateGameUI()
+                            gameUI.updateGameInfo(getABInfo())
+                            })
                 }
-                gameUI.renderBoard()
-                gameUI.updateGameUI()
-                gameUI.updateGameInfo(getABInfo())
             }
         }
 }

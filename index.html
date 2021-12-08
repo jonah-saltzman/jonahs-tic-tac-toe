@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>MegaMax Tic-Tac-Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Links -->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Scripts -->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+      
+    </head>
+    <body>
+      <!-- MODAL -->
+      <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- MODAL title and authentication success/failure badges -->
+              <div class="container-fluid">
+                <h5 id="authModal-title" class="modal-title" id="authModalLabel">Login</h5>
+                <span id="signin-failed-badge" class="badge bg-danger">Sign-in failed</span>
+                <span id="signup-failed-badge" class="badge bg-danger">Sign-up failed</span>
+                <span id="account-created-badge" class="badge bg-success">Account created</span>
+                <span id="password-match-badge" class="badge bg-danger">Passwords don't match</span>
+              </div>
+              <button id="close-auth-modal" type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <!-- MODAL sign-in content -->
+              <section id="modal-signin">
+                <form name="signinForm" id="authmodal-signin-form">
+                  <div class="mb-3">
+                    <label for="signin-email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="signin-email" name="signinform[email]">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signin-password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signin-password" name="signinform[password]">
+                  </div>
+                </form>
+              </section>
+            <!-- MODAL register content -->
+              <section id="modal-signup">
+                <form id="authmodal-signup-form">
+                  <div class="mb-3">
+                    <label for="signup-email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="signup-email" name="signupform[email]">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signup-password" name="signupform[password]">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-password" class="form-label">Confirm password</label>
+                    <input type="password" class="form-control" id="signup-passwordconfirm" name="signupform[passwordConfirm]">
+                  </div>
+                </form>
+              </section>
+            </div>
+            <!-- MODAL submit & sign-in/sign-up toggle buttons -->
+            <div class="modal-footer">
+             <button type="submit" form="authmodal-signin-form" class="btn btn-primary signin-toggled">Login</button>
+             <button id="signin-register" type="button" class="btn btn-outline-secondary signin-toggled">Sign Up</button>
+             <button type="submit" form="authmodal-signup-form" class="btn btn-primary signup-toggled">Sign Up</button>
+             <button id="register-signin" type="button" class="btn btn-outline-secondary signup-toggled">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL -->
+      <!-- Navbar -->
+      <nav id="top-nav"class="navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">MegaMax Tic-Tac-Toe</a>
+            <h5 id="author">by Jonah Saltzman</h5>
+          </div>
+          <span id="signed-in-badge" class="badge bg-success"></span>
+          <span id="signed-out-badge" class="badge bg-danger"></span>
+          <!-- Toggle-able sign-in/sign-out buttons (sign-in launches modal) -->
+          <button id="launch-authModal" type="button" class="btn btn-outline-light btn-lg white-btn">Login/Signup</button>
+          <button id="signout-button" class="btn btn-outline-light btn-lg" type="button">Sign Out</button>
+        </div>
+      </nav>
+      <!-- GAME INFO TAB -->
+
+      <section id="game-section">
+        <!-- Game start/reset buttons -->
+        <div id="button-div">
+          <form id="players-form">
+            <div class="row d-flex align-items-center">
+              <div class="col-auto">
+                <button id="start-game-btn" class="btn btn-success" type="submit" form="players-form" disabled>New Game</button>
+                <button id="reset-game-btn" class="btn btn-success" type="button" disabled>Reset Game</button>
+              </div>
+
+              <div class="col-auto">
+                <div class="board-form-check">
+                  <input class="form-check-input board-btn radio" type="radio" name="boardSelect" id="three-btn" value="three" checked>
+                  <label class="form-check-label board-btn" for="pvp-btn">3x3 Board</label>
+                </div>
+                <div class="board-form-check">
+                  <input class="form-check-input board-btn radio" type="radio" name="boardSelect" id="five-btn" value="five">
+                  <label class="form-check-label board-btn" for="vs-comp-btn">5x5 Board</label>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <div class="player-form-check">
+                  <input class="form-check-input player-btn radio" type="radio" name="playerSelect" id="pvp-btn" value="pvp" checked disabled>
+                  <label class="form-check-label player-btn" for="pvp-btn">2-Player</label>
+                </div>
+                <div class="player-form-check">
+                  <input class="form-check-input player-btn radio" type="radio" name="playerSelect" id="vs-comp-btn" value="comp" disabled>
+                  <label class="form-check-label player-btn" for="vs-comp-btn">VS Computer</label>
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="difficulty-form-check">
+                  <input class="form-check-input difficulty-btn radio" type="radio" name="difficulty" id="easy-btn" value="easy" checked>
+                  <label class="form-check-label difficulty-btn" for="pvp-btn">Easy</label>
+                </div>
+                <div class="difficulty-form-check">
+                  <input class="form-check-input difficulty-btn radio" type="radio" name="difficulty" id="hard-btn" value="hard">
+                  <label class="form-check-label difficulty-btn" for="vs-comp-btn">Hard</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Game board container & divs -->
+        <div class="container start-game game-container three-container" id="game-board">
+          <div data-id=0 class="box" id="box0"></div>
+          <div data-id=1 class="box" id="box1"></div>
+          <div data-id=2 class="box" id="box2"></div>
+          <div data-id=3 class="box" id="box3"></div>
+          <div data-id=4 class="box" id="box4"></div>
+          <div data-id=5 class="box" id="box5"></div>
+          <div data-id=6 class="box" id="box6"></div>
+          <div data-id=7 class="box" id="box7"></div>
+          <div data-id=8 class="box" id="box8"></div>
+        </div>
+        <div class="container start-game five-game-container five-container" id="five-game-board">
+          <div data-id=0 class="box box-top box-left" id="fivebox0"></div>
+          <div data-id=1 class="box box-top" id="fivebox1"></div>
+          <div data-id=2 class="box box-top" id="fivebox2"></div>
+          <div data-id=3 class="box box-top" id="fivebox3"></div>
+          <div data-id=4 class="box box-top box-right" id="fivebox4"></div>
+          <div data-id=5 class="box box-left" id="fivebox5"></div>
+          <div data-id=6 class="box" id="fivebox6"></div>
+          <div data-id=7 class="box" id="fivebox7"></div>
+          <div data-id=8 class="box" id="fivebox8"></div>
+          <div data-id=9 class="box box-right" id="fivebox9"></div>
+          <div data-id=10 class="box box-left" id="fivebox10"></div>
+          <div data-id=11 class="box" id="fivebox11"></div>
+          <div data-id=12 class="box" id="fivebox12"></div>
+          <div data-id=13 class="box" id="fivebox13"></div>
+          <div data-id=14 class="box box-right" id="fivebox14"></div>
+          <div data-id=15 class="box box-left" id="fivebox15"></div>
+          <div data-id=16 class="box" id="fivebox16"></div>
+          <div data-id=17 class="box" id="fivebox17"></div>
+          <div data-id=18 class="box" id="fivebox18"></div>
+          <div data-id=19 class="box box-right" id="fivebox19"></div>
+          <div data-id=20 class="box box-bottom box-left" id="fivebox20"></div>
+          <div data-id=21 class="box box-bottom" id="fivebox21"></div>
+          <div data-id=22 class="box box-bottom" id="fivebox22"></div>
+          <div data-id=23 class="box box-bottom" id="fivebox23"></div>
+          <div data-id=24 class="box box-bottom box-right" id="fivebox24"></div>
+        </div>
+      </section>
+      <section>
+        <div class="alerts-container container-fluid">
+        </div>
+      </section>
+    </body>
+</html>

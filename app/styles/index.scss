@@ -1,0 +1,192 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    display: flex; 
+    flex-direction: column;
+    background-color: #0d6dfd25;
+}
+
+#author {
+    color: white;
+}
+
+// Navbar
+.navbar-brand {
+    color:rgb(255, 255, 255)
+}
+#top-nav {
+    background-color: #4b93ff;
+}
+
+// Authentication form styling
+
+.white-btn {
+    color: white
+}
+.signup-form-group {
+    margin: 7px 0
+}
+.form-label {
+    margin: 0 5px;
+    display: block;
+}
+#signed-in-badge {
+    margin: auto;
+}
+
+// Non-board game element styling
+#game-section {
+    justify-content: center;
+    margin-top: 50px;
+    align-content: center;
+    order: 0
+}
+#button-div {
+    justify-items: center;
+    margin-left: 46.5%;
+}
+.alerts-container {
+    background-color: rgba(156, 156, 156, 0.281);
+    position:absolute;
+    width:720px;
+    top:660px;
+    left:25%;
+    border-radius: 10px;
+    border-style:unset;
+    transition: visibility 0.5s;
+    transition: all 0.5s linear;
+}
+
+.alerts-container-big {
+    top: 990px;
+}
+
+.alert {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+// Container of board spaces
+#game-board {
+    margin: 0 0 0 3px;
+}
+.game-container{
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+	width: 450px;
+    height: 450px;
+    margin: 0;
+    padding: 0;
+}
+
+.five-game-container{
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+	width: 750px;
+    height: 750px;
+    margin: 0;
+    padding: 0;
+}
+
+// Whole-board styling for ties & prior to game start
+.tie {
+    background-color: rgba(224, 224, 224, 0.657);
+    pointer-events: none;
+    border-radius: 25px;
+}
+.start-game {
+    background-color: rgba(255, 87, 87, 0.657);
+    pointer-events: none;
+    border-radius: 35px;
+}
+
+// Board spaces styling
+.box{
+	float: left;
+	width: 150px;
+	height: 150px;
+	border: 2.5px solid $secondary;
+	font-size: 125px;
+	text-align: center;
+	line-height: 145px;
+    margin: 0;
+    padding: 0;
+}
+.container .box:hover {
+	background: #0d6dfda9;
+	color: white;
+}
+.win-position {
+    background-color: rgba(19, 219, 19, 0.657);
+    pointer-events: none;
+}
+
+.box-top {
+    border-top: 0;
+}
+
+.box-right {
+    border-right: 0;
+}
+
+.box-bottom {
+    border-bottom: 0;
+}
+
+.box-left {
+    border-left: 0;
+}
+
+.box-top.box-left {
+    border-radius: 35px 0 0 0;
+}
+
+.box-top.box-right {
+    border-radius: 0 35px 0 0;
+}
+
+.box-bottom.box-right {
+    border-radius: 0 0 35px 0;
+}
+
+.box-bottom.box-left {
+    border-radius: 0 0 0 35px;
+}
+
+// Individual box border styling
+#box0 {
+    border-left: 0; 
+    border-top: 0;
+    border-radius: 35px 0 0 0;
+}
+#box1 {
+    border-top: 0
+}
+#box2 {
+    border-top: 0; 
+    border-right: 0;
+    border-radius: 0 35px 0 0;
+}
+#box3 {
+    border-left: 0
+}
+#box5 {
+    border-right: 0
+}
+#box6 {
+    border-left: 0; 
+    border-bottom: 0;
+    border-radius: 0 0 0 35px;
+}
+#box7 {
+    border-bottom: 0
+}
+#box8 {
+    border-right: 0; 
+    border-bottom: 0;
+    border-radius: 0 0 35px 0;
+}

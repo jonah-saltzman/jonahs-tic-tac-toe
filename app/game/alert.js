@@ -18,10 +18,7 @@ class gameAlert {
         } else {
             this.strong = `The computer has moved to position ${info.game.lastMove}.`
             this.classes += ' alert-warning'
-            this.text = `The algorithm analyzed ${totalMoves} games, of which it` + 
-                        ` won ${info.alg.wins}, lost ${info.alg.losses}, and tied ` +
-                        `${info.alg.draws}. Checked <strong>${info.alg.moves.toLocaleString()} ` +
-                        `moves</strong> total.`
+            this.text = `The algorithm analyzed ${totalMoves} games, of which it won ${info.alg.wins.toLocaleString()}, lost ${info.alg.losses.toLocaleString()}, and tied ${info.alg.draws.toLocaleString()}. Checked <strong>${info.alg.moves.toLocaleString()} moves</strong> total.`
         }
     }
     getHtml() {

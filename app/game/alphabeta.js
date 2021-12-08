@@ -59,10 +59,14 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT, alpha, beta) {
 	if (isGameOver(board)) {
 		return 0
 	}
+	if (depth >= 7) {
+		return 0
+	}
 
 	if (isMaximizer) {
 		let maxScore = Number.NEGATIVE_INFINITY
 		const nextBoards = generateBoards(board, _PLAYER)
+		//nextBoards.sort((a, b) => 0.5 - Math.random())
 		for (let i = 0; i < nextBoards.length; i++) {
 			maxScore = Math.max(
 				maxScore,
@@ -78,13 +82,15 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT, alpha, beta) {
 			)
 			alpha = Math.max(alpha, maxScore)
 			if (maxScore >= beta) {
+				console.log('pruning')
 				break
 			}
-			return maxScore
 		}
+	return maxScore
 	} else {
 		let minScore = Number.POSITIVE_INFINITY
 		const nextBoards = generateBoards(board, _OPPONENT)
+		//nextBoards.sort((a, b) => 0.5 - Math.random())
 		for (let i = 0; i < nextBoards.length; i++) {
 			minScore = Math.min(
 				minScore,
@@ -100,10 +106,11 @@ function minMax(board, depth, isMaximizer, _PLAYER, _OPPONENT, alpha, beta) {
 			)
 			beta = Math.min(beta, minScore)
 			if (minScore <= alpha) {
+				console.log('pruning')
 				break
 			}
-			return minScore
 		}
+		return minScore
 	}
 }
 
@@ -162,4 +169,4 @@ const abConditions = [
 	[4, 8, 12, 16, 20],
 ]
 
-module.exports = {alphaBetaDriver, getABInfo}
+module.exports = { alphaBetaDriver, getABInfo }

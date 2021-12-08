@@ -10,7 +10,7 @@ const getFormFields = require('../../lib/get-form-fields')
 const onBoardClick = (event) => {
 	const divID = $(event.target).data('id')
     const player = gameData.getPlayer()
-    if (gameData.isValidMove(divID) && gameData.isBoardSmall()) {
+    if (gameData.isValidMove(divID) && gameData.isBoardSmall() && gameData.getGameID()) {
             gameData.addMove(player, divID)
             gameAPI.updateGame(gameData.getGameInfo()).then(() => {
                 gameUI.renderBoard()
@@ -34,14 +34,41 @@ const onBoardClick = (event) => {
                     gameUI.updateGameInfo()
                 }
             })
-        } else if (gameData.isValidMove(divID)) {
+        } else if (gameData.isValidMove(divID) && gameData.isGameStarted()) {
             gameData.addMove(player, divID)
             gameUI.renderBoard()
             gameUI.updateGameUI()
             if (!gameData.isPVP()) {
-                const compMoves = alphaBetaDriver(gameData.getBoard(), gameData.getPlayer())
-                const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
-                gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
+                if (gameData.getMoveCount() < 3) {
+                    const compMoves = []
+                    const corners = [0, 4, 20, 24]
+                    const freeCorners = []
+                    let middleAvailable = false
+                    gameData.getBoard().forEach((position, index) => {
+                        if (!position) {
+                            compMoves.push(index)
+                            if (index === 12) {
+                                middleAvailable = true
+                            }
+                            if (corners.includes(index)) {
+                                freeCorners.push(index)
+                            }
+                        }
+                    })
+                    let randMove
+                    if (middleAvailable) {
+                        randMove = 12
+                    } else if (freeCorners.length > 0) {
+                        randMove = freeCorners[Math.floor(Math.random() * freeCorners.length)]
+                    } else {
+                        randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
+                    }
+                    gameData.addMove(gameData.getPlayer(), randMove)
+                } else {
+                    const compMoves = alphaBetaDriver(gameData.getBoard(), gameData.getPlayer())
+                    const randMove = compMoves[Math.floor(Math.random() * compMoves.length)]
+                    gameData.addMove(gameData.getPlayer(), randMove.move.toIndex)
+                }
                 gameUI.renderBoard()
                 gameUI.updateGameUI()
                 gameUI.updateGameInfo(getABInfo())
@@ -79,20 +106,6 @@ const onStartGame = (event) => {
         gameUI.updateGameUI()
     }
 }
-
-// const onNewGame = () => {
-//     if (store.authed === false) {
-//         alert('Please login!')
-//         return
-//     }
-//     if (!gameData.isGameStarted()) {
-//         gameUI.startGameUI()
-//         gameAPI.newGame().then((result) => {
-//                 gameData.startGame(result.game)
-//                 gameUI.updateGameUI()
-//             })
-//     }
-// }
 
 const onChangeVS = () => {
     gameUI.updateGameUI()

@@ -183,6 +183,10 @@ const getWinInfo = () => {
             : bigConditions)
 }
 
+const getMoveCount = () => gameInfo.moves
+
+const getGameID = () => gameInfo.gameID
+
 module.exports = {
     isGameOver,
     isValidMove,
@@ -200,5 +204,7 @@ module.exports = {
     isPrevGameSmall,
     clearBoards,
     getSmallBoard,
-    getBigBoard
+    getBigBoard,
+    getMoveCount,
+    getGameID
 }
